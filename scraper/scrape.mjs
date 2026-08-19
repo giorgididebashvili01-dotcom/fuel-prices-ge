@@ -155,18 +155,22 @@ const today = now.toISOString().slice(0, 10);
 
 const snapPrices = {};
 const snapNames = {};
+const snapProducts = {};
 for (const c of results) {
   snapNames[c.id] = c.name;
   const cats = {};
+  const prods = {};
   for (const p of c.prices) {
+    prods[p.name] = p.price;
     if (p.category === "other") continue;
     if (cats[p.category] == null || p.price < cats[p.category]) cats[p.category] = p.price;
   }
   snapPrices[c.id] = cats;
+  snapProducts[c.id] = prods;
 }
 
 const idx = history.findIndex((h) => h.date === today);
-const snap = { date: today, names: snapNames, prices: snapPrices };
+const snap = { date: today, names: snapNames, prices: snapPrices, products: snapProducts };
 if (idx >= 0) history[idx] = snap;
 else history.push(snap);
 history.sort((a, b) => a.date.localeCompare(b.date));

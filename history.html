@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ფასების ისტორია — საწვავის პულსი</title>
+<meta name="description" content="საწვავის ფასების ისტორია და ანალიტიკა საქართველოში — დინამიკა კომპანიებისა და კატეგორიების მიხედვით.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛽</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="wrap">
+    <a class="brand" href="./">
+      <span id="brand-mark"></span>
+      <span>საწვავის პულსი<small>საქართველოს საწვავის ბაზარი</small></span>
+    </a>
+    <div class="nav">
+      <a href="./">მიმოხილვა</a>
+      <a href="history.html" class="active">ისტორია</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero wrap">
+  <h1>ფასების <span class="accent">ისტორია</span></h1>
+  <p class="subtitle">აირჩიე საწვავი, პერიოდი და კომპანიები — და ნახე, როგორ მოძრაობს ბაზარი.</p>
+  <p class="updated"><span class="live-dot"></span><span id="updated"></span></p>
+</header>
+
+<main class="wrap">
+  <div class="filters" id="cat-filters" role="tablist" aria-label="საწვავის კატეგორია"></div>
+  <div class="filters" id="range-filters" role="tablist" aria-label="პერიოდი"></div>
+  <div class="filters" id="company-filters" aria-label="კომპანიები"></div>
+
+  <div class="stats-row" id="stats"></div>
+
+  <div class="viz-root" id="chart-card">
+    <div id="chart"></div>
+    <div class="legend" id="legend"></div>
+    <div class="tooltip" id="tooltip"></div>
+  </div>
+
+  <section aria-labelledby="cl-title">
+    <h2 id="cl-title"><span class="b-mark"></span>ბოლო ცვლილებები</h2>
+    <p class="hint">ფასის ყველა დაფიქსირებული ცვლილება არჩეულ კატეგორიაში.</p>
+    <ul class="changelog" id="changelog"></ul>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>მონაცემები გროვდება კომპანიების ოფიციალური საიტებიდან ყოველ 3 საათში</p>
+  <p>შექმნილია საქართველოში <span class="heart">♥</span></p>
+</footer>
+
+<script src="assets/common.js"></script>
+<script src="assets/history.js"></script>
+</body>
+</html>

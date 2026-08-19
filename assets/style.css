@@ -1,133 +1,250 @@
+/* ═══ საწვავის პულსი — მუქი „ბირჟული" დიზაინი ქართული ხასიათით ═══ */
+
 :root {
-  color-scheme: light;
-  --page: #f9f9f7;
-  --surface-1: #fcfcfb;
-  --text-primary: #0b0b0b;
-  --text-secondary: #52514e;
-  --text-muted: #898781;
-  --grid: #e1e0d9;
-  --baseline: #c3c2b7;
-  --border: rgba(11, 11, 11, 0.10);
-  --best: #006300;
-  --best-bg: rgba(12, 163, 12, 0.10);
-  --series-gulf: #2a78d6;
-  --series-wissol: #eb6834;
-  --series-rompetrol: #1baf7a;
-  --series-socar: #eda100;
-  --series-lukoil: #e87ba4;
-  --series-portal: #008300;
-  --series-other: #4a3aa7;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-    --page: #0d0d0d;
-    --surface-1: #1a1a19;
-    --text-primary: #ffffff;
-    --text-secondary: #c3c2b7;
-    --text-muted: #898781;
-    --grid: #2c2c2a;
-    --baseline: #383835;
-    --border: rgba(255, 255, 255, 0.10);
-    --best: #0ca30c;
-    --best-bg: rgba(12, 163, 12, 0.14);
-    --series-gulf: #3987e5;
-    --series-wissol: #d95926;
-    --series-rompetrol: #199e70;
-    --series-socar: #c98500;
-    --series-lukoil: #d55181;
-    --series-portal: #008300;
-    --series-other: #9085e9;
-  }
+  color-scheme: dark;
+  --bg: #07090c;
+  --bg-glow: radial-gradient(1200px 500px at 50% -10%, rgba(168, 50, 74, 0.14), transparent 65%);
+  --surface: #101318;
+  --surface-2: #151a21;
+  --surface-3: #1b212b;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.14);
+  --text: #f2f4f8;
+  --text-2: #a6afc0;
+  --text-muted: #667085;
+  --grid: rgba(255, 255, 255, 0.055);
+  --baseline: rgba(255, 255, 255, 0.16);
+  --wine: #c13b55;        /* ღვინისფერი აქცენტი */
+  --wine-deep: #7d2237;
+  --gold: #d8a94e;        /* ოქროსფერი — ბორჯღალი */
+  --down: #22c58b;        /* გაიაფდა — მწვანე */
+  --up: #ef4655;          /* გაძვირდა — წითელი */
+  --down-bg: rgba(34, 197, 139, 0.12);
+  --up-bg: rgba(239, 70, 85, 0.12);
 }
 
 * { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  background: var(--page);
-  color: var(--text-primary);
-  font-family: system-ui, -apple-system, "Segoe UI", "Noto Sans Georgian", sans-serif;
-  line-height: 1.5;
+  background: var(--bg);
+  background-image: var(--bg-glow);
+  background-repeat: no-repeat;
+  color: var(--text);
+  font-family: "Noto Sans Georgian", system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
 }
-.wrap { max-width: 1060px; margin: 0 auto; padding: 0 20px; }
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+a { color: inherit; }
 
-.site-header { padding: 36px 0 8px; }
-.site-header h1 { margin: 0 0 4px; font-size: 1.7rem; }
-.subtitle { margin: 0; color: var(--text-secondary); }
-.updated { margin: 6px 0 0; color: var(--text-muted); font-size: 0.85rem; }
-
-h2 { font-size: 1.15rem; margin: 40px 0 6px; }
-.hint { margin: 0 0 12px; color: var(--text-muted); font-size: 0.85rem; }
-.best-swatch {
-  display: inline-block; width: 12px; height: 12px; border-radius: 3px;
-  background: var(--best-bg); border: 1px solid var(--best); vertical-align: -1px;
+/* ─── ზედა ზოლი ─── */
+.topbar {
+  position: sticky; top: 0; z-index: 20;
+  background: rgba(7, 9, 12, 0.82);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
 }
+.topbar .wrap {
+  display: flex; align-items: center; gap: 12px;
+  padding-top: 12px; padding-bottom: 12px;
+}
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.02rem; letter-spacing: 0.01em; text-decoration: none; }
+.brand .borjgali { color: var(--gold); animation: spin 40s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .brand .borjgali { animation: none; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+.brand small { display: block; font-weight: 400; font-size: 0.68rem; color: var(--text-muted); letter-spacing: 0.06em; }
+.topbar .nav { margin-left: auto; display: flex; gap: 8px; }
+.topbar .nav a {
+  text-decoration: none; font-size: 0.86rem; color: var(--text-2);
+  padding: 7px 14px; border-radius: 999px; border: 1px solid transparent;
+}
+.topbar .nav a:hover { color: var(--text); border-color: var(--border-strong); }
+.topbar .nav a.active { color: #fff; background: linear-gradient(135deg, var(--wine), var(--wine-deep)); }
 
-/* Stat tiles */
+/* ─── ტიკერი ─── */
+.ticker-bar { overflow: hidden; border-bottom: 1px solid var(--border); background: var(--surface); }
+.ticker {
+  display: flex; gap: 34px; padding: 8px 0; width: max-content;
+  animation: ticker 45s linear infinite;
+}
+.ticker-bar:hover .ticker { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .ticker { animation: none; } }
+@keyframes ticker { to { transform: translateX(-50%); } }
+.tick { display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--text-2); white-space: nowrap; }
+.tick b { color: var(--text); font-variant-numeric: tabular-nums; font-weight: 650; }
+
+/* ─── გმირი ─── */
+.hero { padding: 42px 0 10px; }
+.hero h1 { margin: 0 0 6px; font-size: clamp(1.6rem, 4vw, 2.3rem); font-weight: 800; letter-spacing: -0.01em; }
+.hero h1 .accent { background: linear-gradient(100deg, var(--wine) 10%, var(--gold) 90%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.subtitle { margin: 0; color: var(--text-2); max-width: 56ch; }
+.updated { margin: 8px 0 0; color: var(--text-muted); font-size: 0.83rem; display: flex; align-items: center; gap: 7px; }
+.live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--down); box-shadow: 0 0 0 0 rgba(34,197,139,0.5); animation: pulse 2.4s ease-out infinite; }
+@keyframes pulse { 70% { box-shadow: 0 0 0 9px rgba(34,197,139,0); } 100% { box-shadow: 0 0 0 0 rgba(34,197,139,0); } }
+
+h2 {
+  font-size: 1.12rem; font-weight: 700; margin: 46px 0 6px;
+  display: flex; align-items: center; gap: 9px;
+}
+h2 .borjgali { color: var(--wine); flex: none; }
+.hint { margin: 0 0 14px; color: var(--text-muted); font-size: 0.84rem; }
+
+/* ─── დელტა-ჩიპები ─── */
+.delta {
+  display: inline-flex; align-items: center; gap: 2px;
+  font-size: 0.76rem; font-weight: 700; font-variant-numeric: tabular-nums;
+  padding: 2px 7px; border-radius: 6px; line-height: 1.4; vertical-align: middle;
+}
+.delta.down { color: var(--down); background: var(--down-bg); }
+.delta.up { color: var(--up); background: var(--up-bg); }
+.delta.flat { color: var(--text-muted); background: rgba(255,255,255,0.05); }
+
+/* ─── ბარათები (ყველაზე იაფი) ─── */
 .tiles {
-  display: grid; gap: 12px; margin-top: 24px;
-  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  display: grid; gap: 14px; margin-top: 26px;
+  grid-template-columns: repeat(auto-fit, minmax(196px, 1fr));
 }
 .tile {
-  background: var(--surface-1); border: 1px solid var(--border);
-  border-radius: 10px; padding: 14px 16px;
+  background: linear-gradient(175deg, var(--surface-2), var(--surface));
+  border: 1px solid var(--border); border-radius: 16px; padding: 16px 18px 12px;
+  position: relative; overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
 }
-.tile .t-label { color: var(--text-secondary); font-size: 0.85rem; }
-.tile .t-value { font-size: 1.7rem; font-weight: 650; margin: 2px 0; }
-.tile .t-value .gel { font-size: 1rem; font-weight: 500; color: var(--text-secondary); }
-.tile .t-note { color: var(--text-muted); font-size: 0.8rem; display: flex; align-items: center; gap: 6px; }
+.tile:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+.tile .t-label { color: var(--text-2); font-size: 0.8rem; }
+.tile .t-value { font-size: 1.85rem; font-weight: 800; margin: 3px 0 1px; font-variant-numeric: tabular-nums; display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.tile .t-value .gel { font-size: 0.95rem; font-weight: 500; color: var(--text-2); }
+.tile .t-note { color: var(--text-muted); font-size: 0.78rem; display: flex; align-items: center; gap: 6px; }
+.tile .spark { display: block; margin: 8px -4px -2px; width: calc(100% + 8px); height: auto; }
 .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex: none; }
 
-/* Comparison table */
-.table-scroll { overflow-x: auto; background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; }
-table { border-collapse: collapse; width: 100%; min-width: 620px; }
-th, td { padding: 10px 14px; text-align: right; font-variant-numeric: tabular-nums; }
+/* ─── ცხრილი ─── */
+.table-scroll {
+  overflow-x: auto; background: var(--surface);
+  border: 1px solid var(--border); border-radius: 16px;
+}
+table { border-collapse: collapse; width: 100%; min-width: 680px; }
+th, td { padding: 12px 16px; text-align: right; font-variant-numeric: tabular-nums; }
 th:first-child, td:first-child { text-align: left; }
-thead th { color: var(--text-secondary); font-weight: 600; font-size: 0.85rem; border-bottom: 1px solid var(--grid); }
-tbody tr + tr td { border-top: 1px solid var(--grid); }
-td.company { font-weight: 600; white-space: nowrap; }
-td.company .dot { margin-right: 8px; }
-td.best { background: var(--best-bg); color: var(--best); font-weight: 650; }
+thead th {
+  color: var(--text-muted); font-weight: 600; font-size: 0.78rem;
+  text-transform: uppercase; letter-spacing: 0.07em;
+  border-bottom: 1px solid var(--border);
+}
+tbody tr { transition: background 0.15s; }
+tbody tr:hover { background: rgba(255, 255, 255, 0.025); }
+tbody tr + tr td { border-top: 1px solid var(--border); }
+td.company { font-weight: 700; white-space: nowrap; }
+td.company .dot { margin-right: 9px; }
+td .cell-price { font-weight: 650; }
+td .delta { margin-left: 7px; }
+td.best .cell-price { color: var(--down); }
+td.best { background: var(--down-bg); }
 td.na { color: var(--text-muted); }
 
-/* Chart */
-.chart-controls { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
-.chart-controls button {
-  font: inherit; font-size: 0.88rem; padding: 6px 14px; border-radius: 999px;
-  border: 1px solid var(--border); background: var(--surface-1);
-  color: var(--text-secondary); cursor: pointer;
+/* ─── ისტორიის თიზერი (მთავარ გვერდზე) ─── */
+.history-teaser {
+  display: block; text-decoration: none;
+  background: linear-gradient(175deg, var(--surface-2), var(--surface));
+  border: 1px solid var(--border); border-radius: 16px; padding: 20px 22px;
+  transition: border-color 0.2s;
 }
-.chart-controls button[aria-selected="true"] {
-  border-color: var(--text-primary); color: var(--text-primary); font-weight: 600;
+.history-teaser:hover { border-color: var(--wine); }
+.history-teaser .ht-top { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.history-teaser .ht-cta {
+  margin-left: auto; font-size: 0.88rem; font-weight: 700; color: #fff;
+  background: linear-gradient(135deg, var(--wine), var(--wine-deep));
+  padding: 9px 18px; border-radius: 999px; white-space: nowrap;
 }
+.history-teaser .ht-note { color: var(--text-2); font-size: 0.9rem; }
+.history-teaser #teaser-chart { margin-top: 12px; }
+.history-teaser #teaser-chart svg { display: block; width: 100%; height: auto; }
+.chart-empty { color: var(--text-muted); font-size: 0.88rem; padding: 26px 0; text-align: center; }
+
+/* ─── კომპანიების ბარათები ─── */
+.cards { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(256px, 1fr)); }
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; padding: 16px 18px;
+  transition: border-color 0.2s;
+}
+.card:hover { border-color: var(--border-strong); }
+.card h3 { margin: 0 0 10px; font-size: 0.98rem; display: flex; align-items: center; gap: 9px; }
+.card h3 .c-count { margin-left: auto; color: var(--text-muted); font-weight: 400; font-size: 0.76rem; }
+.card ul { list-style: none; margin: 0; padding: 0; }
+.card li { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 6px 0; font-size: 0.88rem; border-top: 1px solid var(--border); }
+.card li:first-child { border-top: 0; }
+.card li .n { color: var(--text-2); }
+.card li .p { font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowrap; }
+.card li.cheapest .n::after { content: "★"; color: var(--gold); margin-left: 6px; font-size: 0.75rem; }
+.card li .delta { margin-left: 6px; }
+
+/* ─── ისტორიის გვერდი ─── */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 10px; align-items: center; }
+.filters .sep { width: 1px; height: 22px; background: var(--border-strong); margin: 0 4px; }
+.chip {
+  font: inherit; font-size: 0.85rem; padding: 7px 15px; border-radius: 999px;
+  border: 1px solid var(--border-strong); background: var(--surface);
+  color: var(--text-2); cursor: pointer; transition: all 0.15s;
+  display: inline-flex; align-items: center; gap: 7px;
+}
+.chip:hover { color: var(--text); border-color: var(--text-muted); }
+.chip[aria-selected="true"], .chip.on {
+  color: #fff; background: linear-gradient(135deg, var(--wine), var(--wine-deep));
+  border-color: transparent; font-weight: 700;
+}
+.chip.company[aria-pressed="false"] { opacity: 0.42; }
+.chip.company { border-color: var(--border-strong); background: var(--surface); color: var(--text); }
+
+.stats-row { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); margin: 14px 0; }
+.stat {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 13px;
+  padding: 12px 16px;
+}
+.stat .s-label { color: var(--text-muted); font-size: 0.75rem; }
+.stat .s-value { font-size: 1.25rem; font-weight: 800; font-variant-numeric: tabular-nums; display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.stat .s-sub { color: var(--text-muted); font-size: 0.75rem; }
+
 .viz-root {
-  background: var(--surface-1); border: 1px solid var(--border);
-  border-radius: 10px; padding: 16px; position: relative;
+  background: linear-gradient(175deg, var(--surface-2), var(--surface));
+  border: 1px solid var(--border); border-radius: 16px; padding: 18px;
+  position: relative;
 }
 #chart svg { display: block; width: 100%; height: auto; }
-#chart text { font-family: inherit; }
-.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 10px; }
-.legend .item { display: flex; align-items: center; gap: 6px; font-size: 0.85rem; color: var(--text-secondary); }
-.chart-empty { color: var(--text-muted); font-size: 0.9rem; padding: 30px 0; text-align: center; }
+#chart text, #teaser-chart text { font-family: inherit; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 12px; }
+.legend .item { display: flex; align-items: center; gap: 7px; font-size: 0.84rem; color: var(--text-2); }
 .tooltip {
-  position: absolute; pointer-events: none; background: var(--surface-1);
-  border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px;
-  font-size: 0.8rem; box-shadow: 0 4px 14px rgba(0,0,0,0.12);
-  min-width: 130px; z-index: 5; display: none;
+  position: absolute; pointer-events: none; background: var(--surface-3);
+  border: 1px solid var(--border-strong); border-radius: 10px; padding: 9px 12px;
+  font-size: 0.8rem; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  min-width: 148px; z-index: 5; display: none;
 }
-.tooltip .tt-date { color: var(--text-muted); margin-bottom: 4px; }
-.tooltip .tt-row { display: flex; align-items: center; gap: 6px; justify-content: space-between; }
-.tooltip .tt-row b { font-variant-numeric: tabular-nums; font-weight: 600; }
+.tooltip .tt-date { color: var(--text-muted); margin-bottom: 5px; }
+.tooltip .tt-row { display: flex; align-items: center; gap: 10px; justify-content: space-between; }
+.tooltip .tt-row b { font-variant-numeric: tabular-nums; font-weight: 700; }
 .tooltip .tt-name { display: flex; align-items: center; gap: 6px; }
 
-/* Company cards */
-.cards { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
-.card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
-.card h3 { margin: 0 0 8px; font-size: 1rem; display: flex; align-items: center; gap: 8px; }
-.card ul { list-style: none; margin: 0; padding: 0; }
-.card li { display: flex; justify-content: space-between; gap: 10px; padding: 4px 0; font-size: 0.9rem; border-top: 1px solid var(--grid); }
-.card li:first-child { border-top: 0; }
-.card li .p { font-variant-numeric: tabular-nums; font-weight: 600; }
-.card li.cheapest .p { color: var(--best); }
+/* ცვლილებების ჟურნალი */
+.changelog { list-style: none; margin: 0; padding: 0; }
+.changelog li {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 10px 14px; font-size: 0.87rem;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+  margin-bottom: 8px;
+}
+.changelog .cl-date { color: var(--text-muted); font-size: 0.78rem; min-width: 52px; }
+.changelog .cl-co { font-weight: 700; display: flex; align-items: center; gap: 7px; }
+.changelog .cl-prod { color: var(--text-2); }
+.changelog .cl-move { margin-left: auto; font-variant-numeric: tabular-nums; color: var(--text-2); white-space: nowrap; }
+.changelog .cl-move b { color: var(--text); }
 
-.site-footer { padding: 40px 20px 30px; color: var(--text-muted); font-size: 0.82rem; }
+.site-footer { padding: 52px 20px 34px; color: var(--text-muted); font-size: 0.8rem; text-align: center; }
+.site-footer .heart { color: var(--wine); }
+
+@media (max-width: 560px) {
+  .hero { padding-top: 30px; }
+  th, td { padding: 10px 12px; }
+  .topbar .nav a { padding: 6px 11px; }
+}
