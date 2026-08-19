@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>საწვავის ფასები საქართველოში</title>
+<meta name="description" content="ბენზინის, დიზელისა და გაზის მიმდინარე ფასები საქართველოს ყველა მსხვილ ავტოგასამართ ქსელში — Gulf, Wissol, Rompetrol, SOCAR, Lukoil, Portal.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛽</text></svg>">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <h1>⛽ საწვავის ფასები საქართველოში</h1>
+    <p class="subtitle">ყველა მსხვილი ქსელის მიმდინარე ფასი ერთ გვერდზე · განახლდება ავტომატურად</p>
+    <p class="updated" id="updated"></p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="tiles" class="tiles" aria-label="ყველაზე იაფი ფასები"></section>
+
+  <section aria-labelledby="cmp-title">
+    <h2 id="cmp-title">ფასების შედარება</h2>
+    <p class="hint">თითო უჯრაში კომპანიის ყველაზე იაფი პროდუქტია ამ კატეგორიაში. <span class="best-swatch"></span> — ყველაზე იაფი ქვეყანაში.</p>
+    <div class="table-scroll">
+      <table id="cmp-table">
+        <thead></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="chart-title">
+    <h2 id="chart-title">ფასების ისტორია</h2>
+    <div class="chart-controls" id="chart-controls" role="tablist" aria-label="საწვავის კატეგორია"></div>
+    <div class="viz-root" id="chart-card">
+      <div id="chart"></div>
+      <div class="legend" id="legend"></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="all-title">
+    <h2 id="all-title">სრული ფასები კომპანიების მიხედვით</h2>
+    <div class="cards" id="cards"></div>
+  </section>
+</main>
+
+<footer class="site-footer wrap">
+  <p>მონაცემები გროვდება კომპანიების ოფიციალური საიტებიდან ყოველ 3 საათში. ფასები შეიძლება განსხვავდებოდეს კონკრეტულ სადგურზე.</p>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

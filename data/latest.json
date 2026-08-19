@@ -1,0 +1,223 @@
+{
+  "updated": "2026-08-19T14:44:15.482Z",
+  "errors": [],
+  "companies": [
+    {
+      "id": "gulf",
+      "name": "Gulf",
+      "url": "https://gulf.ge/ge/fuel_prices",
+      "prices": [
+        {
+          "name": "G-Force სუპერი",
+          "price": 4.27,
+          "category": "super"
+        },
+        {
+          "name": "G-Force პრემიუმი",
+          "price": 3.83,
+          "category": "premium"
+        },
+        {
+          "name": "G-Force ევრო რეგულარი",
+          "price": 3.65,
+          "category": "regular"
+        },
+        {
+          "name": "ევრო რეგულარი",
+          "price": 3.65,
+          "category": "regular"
+        },
+        {
+          "name": "G-Force ევრო დიზელი",
+          "price": 4.33,
+          "category": "diesel"
+        },
+        {
+          "name": "ევრო დიზელი",
+          "price": 4.23,
+          "category": "diesel"
+        }
+      ]
+    },
+    {
+      "id": "wissol",
+      "name": "Wissol",
+      "url": "https://wissol.ge/en",
+      "prices": [
+        {
+          "name": "Eko Super",
+          "price": 4.23,
+          "category": "super"
+        },
+        {
+          "name": "Eko Premium",
+          "price": 3.82,
+          "category": "premium"
+        },
+        {
+          "name": "Eko Diesel",
+          "price": 4.39,
+          "category": "diesel"
+        },
+        {
+          "name": "Euro Diesel",
+          "price": 4.34,
+          "category": "diesel"
+        },
+        {
+          "name": "Euro Regular",
+          "price": 3.68,
+          "category": "regular"
+        },
+        {
+          "name": "Diesel Energy",
+          "price": 4.29,
+          "category": "diesel"
+        },
+        {
+          "name": "Wissol Gas",
+          "price": 1.64,
+          "category": "gas"
+        },
+        {
+          "name": "A1 SUPER 100",
+          "price": 4.32,
+          "category": "super"
+        }
+      ]
+    },
+    {
+      "id": "rompetrol",
+      "name": "Rompetrol",
+      "url": "https://www.rompetrol.ge/",
+      "prices": [
+        {
+          "name": "efix სუპერი",
+          "price": 4.27,
+          "category": "super"
+        },
+        {
+          "name": "efix ევრო პრემიუმი",
+          "price": 3.83,
+          "category": "premium"
+        },
+        {
+          "name": "efix ევრო რეგულარი",
+          "price": 3.64,
+          "category": "regular"
+        },
+        {
+          "name": "efix ევრო დიზელი",
+          "price": 4.32,
+          "category": "diesel"
+        },
+        {
+          "name": "ევრო დიზელი",
+          "price": 4.22,
+          "category": "diesel"
+        }
+      ]
+    },
+    {
+      "id": "socar",
+      "name": "SOCAR",
+      "url": "https://sgp.ge/",
+      "prices": [
+        {
+          "name": "ნანო სუპერი",
+          "price": 4.24,
+          "category": "super"
+        },
+        {
+          "name": "ნანო პრემიუმი",
+          "price": 3.8,
+          "category": "premium"
+        },
+        {
+          "name": "ნანო ევრო რეგულარი",
+          "price": 3.63,
+          "category": "regular"
+        },
+        {
+          "name": "ევრო 5 დიზელი",
+          "price": 4.2,
+          "category": "diesel"
+        },
+        {
+          "name": "ნანო ევრო 5 დიზელი",
+          "price": 4.3,
+          "category": "diesel"
+        },
+        {
+          "name": "თხევადი აირი",
+          "price": 2.05,
+          "category": "gas"
+        },
+        {
+          "name": "ბუნებრივი აირი",
+          "price": 1.6,
+          "category": "gas"
+        }
+      ]
+    },
+    {
+      "id": "lukoil",
+      "name": "Lukoil",
+      "url": "https://www.lukoil.ge/",
+      "prices": [
+        {
+          "name": "Super Ecto",
+          "price": 4.24,
+          "category": "super"
+        },
+        {
+          "name": "Premium Avangard",
+          "price": 3.81,
+          "category": "premium"
+        },
+        {
+          "name": "Euro Regular",
+          "price": 3.66,
+          "category": "regular"
+        },
+        {
+          "name": "Euro Diesel",
+          "price": 4.22,
+          "category": "diesel"
+        }
+      ]
+    },
+    {
+      "id": "portal",
+      "name": "Portal",
+      "url": "https://portal.com.ge/ka/fuel-prices",
+      "prices": [
+        {
+          "name": "SUPER",
+          "price": 3.89,
+          "category": "super"
+        },
+        {
+          "name": "PREMIUM",
+          "price": 3.73,
+          "category": "premium"
+        },
+        {
+          "name": "EURO REGULAR",
+          "price": 3.58,
+          "category": "regular"
+        },
+        {
+          "name": "EURO DIESEL",
+          "price": 4.19,
+          "category": "diesel"
+        },
+        {
+          "name": "EFFECT DIESEL",
+          "price": 3.99,
+          "category": "diesel"
+        }
+      ]
+    }
+  ]
+}
