@@ -49,10 +49,19 @@ function renderTiles(latest, history, prev) {
   }).join("");
 }
 
+/* კომპანიები დალაგებული „რეიტინგით" — ვისაც რეგულარი ყველაზე იაფი აქვს */
+function rankedCompanies(latest) {
+  return latest.companies.slice().sort((a, b) => {
+    const av = categoryMin(a, "regular")?.price ?? Infinity;
+    const bv = categoryMin(b, "regular")?.price ?? Infinity;
+    return av - bv;
+  });
+}
+
 function renderTable(latest, prev) {
   const thead = document.querySelector("#cmp-table thead");
   const tbody = document.querySelector("#cmp-table tbody");
-  thead.innerHTML = `<tr><th>კომპანია</th>${CATEGORIES.map(c => `<th scope="col">${c.label}</th>`).join("")}</tr>`;
+  thead.innerHTML = `<tr><th>#&nbsp;&nbsp;კომპანია</th>${CATEGORIES.map(c => `<th scope="col">${c.label}</th>`).join("")}</tr>`;
 
   const colMin = {};
   for (const cat of CATEGORIES) {
@@ -60,28 +69,28 @@ function renderTable(latest, prev) {
     colMin[cat.id] = vals.length ? Math.min(...vals) : null;
   }
 
-  tbody.innerHTML = latest.companies.map(c => {
+  tbody.innerHTML = rankedCompanies(latest).map((c, i) => {
     const cells = CATEGORIES.map(cat => {
       const m = categoryMin(c, cat.id);
       if (!m) return `<td class="na">—</td>`;
       const prevV = prev?.prices?.[c.id]?.[cat.id];
       const isBest = m.price === colMin[cat.id];
-      return `<td class="${isBest ? "best" : ""}" title="${m.name}"><span class="cell-price">${fmtPrice(m.price)}</span>${deltaChip(m.price, prevV)}</td>`;
+      return `<td class="${isBest ? "best" : ""}" title="${m.name}"><span class="cell-price">${fmtPrice(m.price)} ₾</span>${deltaChip(m.price, prevV)}</td>`;
     }).join("");
-    return `<tr><td class="company"><span class="dot" style="background:${seriesColor(c.id)}"></span>${c.name}</td>${cells}</tr>`;
+    return `<tr><td class="company"><span class="co-wrap"><span class="rank">${i + 1}</span>${companyAvatar(c.id, c.name)}<span class="co-name">${c.name}<small>${c.prices.length} პროდუქტი</small></span></span></td>${cells}</tr>`;
   }).join("");
 }
 
 function renderCards(latest, prev) {
   const best = countryBest(latest);
   const el = document.getElementById("cards");
-  el.innerHTML = latest.companies.map(c => {
+  el.innerHTML = rankedCompanies(latest).map(c => {
     const rows = c.prices.map(p => {
       const isBest = best[p.category] && best[p.category].price === p.price && best[p.category].company.id === c.id;
       const prevV = prev?.products?.[c.id]?.[p.name];
       return `<li class="${isBest ? "cheapest" : ""}"><span class="n">${p.name}</span><span class="p">${fmtPrice(p.price)} ₾${deltaChip(p.price, prevV)}</span></li>`;
     }).join("");
-    return `<div class="card"><h3><span class="dot" style="background:${seriesColor(c.id)}"></span>${c.name}<span class="c-count">${c.prices.length} პროდუქტი</span></h3><ul>${rows}</ul></div>`;
+    return `<div class="card"><h3>${companyAvatar(c.id, c.name, 26)}${c.name}<span class="c-count">${c.prices.length} პროდუქტი</span></h3><ul>${rows}</ul></div>`;
   }).join("");
 }
 

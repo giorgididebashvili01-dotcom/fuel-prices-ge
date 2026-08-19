@@ -45,16 +45,25 @@ function prevSnapshot(history) {
   return history.length >= 2 ? history[history.length - 2] : null;
 }
 
-/* დელტა-ჩიპის HTML: მოკლება მწვანეა, მომატება — წითელი */
-function deltaChip(cur, prev, { pct = false } = {}) {
-  if (prev == null || cur == null) return "";
+/* დელტა CoinMarketCap-ის სტილში, ოღონდ შებრუნებული ფერებით:
+   მოკლება (გაიაფება) მწვანეა, მომატება — წითელი. ლარებში, არა პროცენტებში.
+   placeholder=true -> წინა მონაცემის გარეშეც ჩანს ადგილი (—) */
+function deltaChip(cur, prev, { pct = false, placeholder = true } = {}) {
+  if (prev == null || cur == null)
+    return placeholder ? `<span class="delta na" title="ცვლილება ჯერ არ დაფიქსირებულა">—</span>` : "";
   const d = cur - prev;
   if (Math.abs(d) < 0.005) return `<span class="delta flat" title="უცვლელია">0.00</span>`;
   const up = d > 0;
   const arrow = up ? "▲" : "▼";
   const cls = up ? "up" : "down";
-  const pctTxt = pct ? ` (${up ? "+" : "−"}${Math.abs((d / prev) * 100).toFixed(1)}%)` : "";
-  return `<span class="delta ${cls}" title="${up ? "გაძვირდა" : "გაიაფდა"} გუშინდელთან შედარებით">${arrow}${Math.abs(d).toFixed(2)}${pctTxt}</span>`;
+  const pctTxt = pct ? ` (${Math.abs((d / prev) * 100).toFixed(1)}%)` : "";
+  return `<span class="delta ${cls}" title="${up ? "გაძვირდა" : "გაიაფდა"} წინა დღესთან შედარებით">${arrow} ${Math.abs(d).toFixed(2)}${pctTxt}</span>`;
+}
+
+/* კომპანიის „ლოგო" — ინიციალი ფერად წრეში */
+function companyAvatar(id, name, size = 30) {
+  const col = seriesColor(id);
+  return `<span class="avatar" style="width:${size}px;height:${size}px;background:${col}26;color:${col}">${name[0]}</span>`;
 }
 
 /* კომპანიის კატეგორიის მინიმუმი latest-იდან */
