@@ -4,6 +4,7 @@
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+import { execFileSync } from "node:child_process";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DATA = join(ROOT, "data");
@@ -11,9 +12,14 @@ const DATA = join(ROOT, "data");
 const UA =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36";
 
-async function fetchHtml(url) {
+async function fetchHtml(url, extraHeaders = {}) {
   const res = await fetch(url, {
-    headers: { "User-Agent": UA, Accept: "text/html" },
+    headers: {
+      "User-Agent": UA,
+      Accept: "text/html,application/xhtml+xml",
+      "Accept-Language": "ka-GE,ka;q=0.9,en;q=0.8",
+      ...extraHeaders,
+    },
     redirect: "follow",
   });
   if (!res.ok) throw new Error(`${url} -> HTTP ${res.status}`);
@@ -48,7 +54,16 @@ const COMPANIES = [
     name: "Gulf",
     url: "https://gulf.ge/ge/fuel_prices",
     async parse() {
-      let html = await fetchHtml(this.url);
+      /* Cloudflare node-ის fetch-ს TLS-ნაკვალევით ბლოკავს — curl გადის */
+      let html = execFileSync("curl", [
+        "-s", "--max-time", "30",
+        "-A", UA,
+        "-H", "Accept: text/html,application/xhtml+xml",
+        "-H", "Accept-Language: ka-GE,ka;q=0.9,en;q=0.8",
+        "-H", "Referer: https://gulf.ge/ge",
+        this.url,
+      ], { encoding: "utf8", maxBuffer: 10e6 });
+      if (!html || html.length < 1000) throw new Error("gulf: ცარიელი ან დაბლოკილი პასუხი");
       html = html.replace(/<!--[\s\S]*?-->/g, "");
       const names = [...html.matchAll(/<span class="normal">([^<]+)<\/span>/g)]
         .map((m) => m[1].trim())
