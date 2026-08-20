@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-20T01:56:15.027Z",
+  "updated": "2026-08-20T04:03:59.202Z",
   "errors": [],
   "companies": [
     {
@@ -182,7 +182,7 @@
         },
         {
           "name": "Euro Diesel",
-          "price": 4.22,
+          "price": 4.4,
           "category": "diesel"
         }
       ]
