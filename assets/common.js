@@ -32,12 +32,36 @@ function fmtDate(iso) {
 }
 
 async function loadData() {
-  const [latest, history] = await Promise.all([
+  const [latest, history, changes] = await Promise.all([
     fetch("data/latest.json").then(r => r.json()),
     fetch("data/history.json").then(r => r.json()).catch(() => []),
+    fetch("data/changes.json").then(r => r.json()).catch(() => []),
   ]);
   history.sort((a, b) => a.date.localeCompare(b.date));
-  return { latest, history };
+  changes.sort((a, b) => a.t.localeCompare(b.t));
+  return { latest, history, changes };
+}
+
+/* თბილისის დროით: "20 აგვ, 11:13" */
+function fmtDateTime(iso) {
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Asia/Tbilisi", day: "numeric", month: "numeric",
+    hour: "2-digit", minute: "2-digit", hour12: false,
+  }).formatToParts(new Date(iso));
+  const get = t => parts.find(p => p.type === t)?.value;
+  return `${get("day")} ${MONTHS_KA[Number(get("month")) - 1]}, ${get("hour")}:${get("minute")}`;
+}
+
+/* ბოლო ცვლილების დრო თითო პროდუქტზე: Map("companyId|productName" -> ISO) */
+function lastChangeMap(changes) {
+  const m = new Map();
+  for (const e of changes) m.set(`${e.c}|${e.n}`, e.t); // დალაგებულია დროით — ბოლო იმარჯვებს
+  return m;
+}
+
+/* ვერცხლისფერი დროის ჭდე */
+function changedAt(iso) {
+  return iso ? `<span class="changed-at" title="ბოლო ცვლილების დრო">${fmtDateTime(iso)}</span>` : "";
 }
 
 /* წინა დღის ჩანაწერი (ბოლო ჩანაწერამდე) */
@@ -116,6 +140,25 @@ function borjgali(size = 30) {
   }
   return `<svg viewBox="-24 -24 48 48" width="${size}" height="${size}" aria-hidden="true" class="borjgali">
     <circle r="4.6" fill="currentColor"/>${arms}</svg>`;
+}
+
+/* კატეგორია პროდუქტის სახელიდან (სკრეიპერის ლოგიკის ასლი) */
+function catOfName(name) {
+  const n = name.toLowerCase();
+  if (/(გაზ|gas|lpg|cng|ბუნებრივი|თხევადი)/.test(n)) return "gas";
+  if (/(დიზელ|diesel|dizel)/.test(n)) return "diesel";
+  if (/(სუპერ|super)/.test(n)) return "super";
+  if (/(პრემიუმ|premium|avangard|ავანგარდ)/.test(n)) return "premium";
+  if (/(რეგულარ|regular)/.test(n)) return "regular";
+  if (/(ევრო|euro)/.test(n)) return "regular";
+  return "other";
+}
+
+/* თარიღის სტრიქონზე დღეების მიმატება/მოკლება: "2026-08-20", -1 -> "2026-08-19" */
+function shiftDate(dateStr, days) {
+  const d = new Date(dateStr + "T12:00:00Z");
+  d.setUTCDate(d.getUTCDate() + days);
+  return d.toISOString().slice(0, 10);
 }
 
 function renderUpdatedText(iso) {

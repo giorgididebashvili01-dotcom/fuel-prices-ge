@@ -145,8 +145,29 @@ if (results.length === 0) {
 }
 
 const now = new Date();
+
+/* ცვლილებების მუდმივი ჟურნალი — ყოველი ფასის ცვლილება ზუსტი დროით */
+const changesPath = join(DATA, "changes.json");
+const latestPath = join(DATA, "latest.json");
+const changes = existsSync(changesPath) ? JSON.parse(readFileSync(changesPath, "utf8")) : [];
+if (existsSync(latestPath)) {
+  const old = JSON.parse(readFileSync(latestPath, "utf8"));
+  for (const c of results) {
+    const oldCo = old.companies?.find((x) => x.id === c.id);
+    if (!oldCo) continue;
+    for (const p of c.prices) {
+      const oldP = oldCo.prices.find((x) => x.name === p.name);
+      if (oldP && Math.abs(oldP.price - p.price) >= 0.005) {
+        changes.push({ t: now.toISOString(), c: c.id, n: p.name, cat: p.category, from: oldP.price, to: p.price });
+      }
+    }
+  }
+}
+while (changes.length > 3000) changes.shift();
+writeFileSync(changesPath, JSON.stringify(changes));
+
 const latest = { updated: now.toISOString(), errors, companies: results };
-writeFileSync(join(DATA, "latest.json"), JSON.stringify(latest, null, 2));
+writeFileSync(latestPath, JSON.stringify(latest, null, 2));
 
 /* ისტორია: დღეში ერთი ჩანაწერი (ბოლო გაშვება იმარჯვებს), კატეგორიების მინიმუმებით */
 const histPath = join(DATA, "history.json");
@@ -170,7 +191,7 @@ for (const c of results) {
 }
 
 const idx = history.findIndex((h) => h.date === today);
-const snap = { date: today, names: snapNames, prices: snapPrices, products: snapProducts };
+const snap = { date: today, time: now.toISOString(), names: snapNames, prices: snapPrices, products: snapProducts };
 if (idx >= 0) history[idx] = snap;
 else history.push(snap);
 history.sort((a, b) => a.date.localeCompare(b.date));

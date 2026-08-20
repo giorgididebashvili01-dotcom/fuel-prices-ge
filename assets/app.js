@@ -1,5 +1,13 @@
 /* მთავარი გვერდი — მიმოხილვა */
 
+const G = { latest: null, history: [], changes: [], lastChange: new Map(), day: 0 };
+
+const DAYS = [
+  { off: 0, label: "დღეს" },
+  { off: 1, label: "გუშინ" },
+  { off: 2, label: "გუშინწინ" },
+];
+
 function countryBest(latest) {
   const best = {};
   for (const cat of CATEGORIES) {
@@ -29,7 +37,6 @@ function renderTicker(latest, prev) {
   if (!items.length) return;
   const bar = document.getElementById("ticker-bar");
   bar.hidden = false;
-  /* მარკიზა ორმაგდება უწყვეტი მოძრაობისთვის */
   document.getElementById("ticker").innerHTML = items.join("") + items.join("");
 }
 
@@ -40,16 +47,16 @@ function renderTiles(latest, history, prev) {
     const b = best[cat.id];
     const prevMin = prev ? snapCountryMin(prev, cat.id) : null;
     const sparkVals = history.map(h => snapCountryMin(h, cat.id));
+    const ts = G.lastChange.get(`${b.company.id}|${b.name}`);
     return `<div class="tile">
       <div class="t-label">ყველაზე იაფი ${cat.label.toLowerCase()}</div>
       <div class="t-value">${fmtPrice(b.price)}<span class="gel">₾</span>${deltaChip(b.price, prevMin)}</div>
-      <div class="t-note"><span class="dot" style="background:${seriesColor(b.company.id)}"></span>${b.company.name} · ${b.name}</div>
+      <div class="t-note"><span class="dot" style="background:${seriesColor(b.company.id)}"></span>${b.company.name} · ${b.name}${ts ? "&nbsp;·&nbsp;" + changedAt(ts) : ""}</div>
       ${sparkline(sparkVals)}
     </div>`;
   }).join("");
 }
 
-/* კომპანიები დალაგებული „რეიტინგით" — ვისაც რეგულარი ყველაზე იაფი აქვს */
 function rankedCompanies(latest) {
   return latest.companies.slice().sort((a, b) => {
     const av = categoryMin(a, "regular")?.price ?? Infinity;
@@ -75,26 +82,89 @@ function renderTable(latest, prev) {
       if (!m) return `<td class="na">—</td>`;
       const prevV = prev?.prices?.[c.id]?.[cat.id];
       const isBest = m.price === colMin[cat.id];
-      return `<td class="${isBest ? "best" : ""}" title="${m.name}"><span class="cell-price">${fmtPrice(m.price)} ₾</span>${deltaChip(m.price, prevV)}</td>`;
+      const ts = G.lastChange.get(`${c.id}|${m.name}`);
+      return `<td class="${isBest ? "best" : ""}" title="${m.name}"><span class="cell-price">${fmtPrice(m.price)} ₾</span>${deltaChip(m.price, prevV)}${changedAt(ts)}</td>`;
     }).join("");
     return `<tr><td class="company"><span class="co-wrap"><span class="rank">${i + 1}</span>${companyAvatar(c.id, c.name)}<span class="co-name">${c.name}<small>${c.prices.length} პროდუქტი</small></span></span></td>${cells}</tr>`;
   }).join("");
 }
 
-function renderCards(latest, prev) {
-  const best = countryBest(latest);
+/* ---------- ბარათები დღის გადამრთველით ---------- */
+
+function renderDayFilters() {
+  const el = document.getElementById("day-filters");
+  el.innerHTML = DAYS.map(d =>
+    `<button class="chip" role="tab" data-day="${d.off}" aria-selected="${d.off === G.day}">${d.label}</button>`
+  ).join("");
+  el.onclick = e => {
+    const b = e.target.closest("[data-day]");
+    if (!b) return;
+    G.day = Number(b.dataset.day);
+    el.querySelectorAll(".chip").forEach(x => x.setAttribute("aria-selected", String(x === b)));
+    renderCards();
+  };
+}
+
+/* იმ დღის ცვლილების დრო პროდუქტზე (ბოლო ცვლილება იმ დღეს) */
+function dayChangeTs(dateStr, cid, name) {
+  let ts = null;
+  for (const e of G.changes) {
+    if (e.c === cid && e.n === name && e.t.slice(0, 10) === dateStr) ts = e.t;
+  }
+  return ts;
+}
+
+function renderCards() {
   const el = document.getElementById("cards");
-  el.innerHTML = rankedCompanies(latest).map(c => {
-    const rows = c.prices.map(p => {
-      const isBest = best[p.category] && best[p.category].price === p.price && best[p.category].company.id === c.id;
-      const prevV = prev?.products?.[c.id]?.[p.name];
-      return `<li class="${isBest ? "cheapest" : ""}"><span class="n">${p.name}</span><span class="p">${fmtPrice(p.price)} ₾${deltaChip(p.price, prevV)}</span></li>`;
+  const note = document.getElementById("day-note");
+  const todayStr = G.history.length ? G.history[G.history.length - 1].date : new Date().toISOString().slice(0, 10);
+
+  if (G.day === 0) {
+    /* დღეს — ცოცხალი ფასები */
+    const prev = G.history.find(h => h.date === shiftDate(todayStr, -1)) || null;
+    const best = countryBest(G.latest);
+    note.textContent = `მიმდინარე ფასები · განახლდა ${fmtDateTime(G.latest.updated)}-ზე`;
+    el.innerHTML = rankedCompanies(G.latest).map(c => {
+      const rows = c.prices.map(p => {
+        const isBest = best[p.category] && best[p.category].price === p.price && best[p.category].company.id === c.id;
+        const prevV = prev?.products?.[c.id]?.[p.name];
+        const ts = G.lastChange.get(`${c.id}|${p.name}`);
+        return `<li class="${isBest ? "cheapest" : ""}"><span class="n">${p.name}</span><span class="p">${fmtPrice(p.price)} ₾${deltaChip(p.price, prevV)}${changedAt(ts)}</span></li>`;
+      }).join("");
+      return `<div class="card"><h3>${companyAvatar(c.id, c.name, 26)}${c.name}<span class="c-count">${c.prices.length} პროდუქტი</span></h3><ul>${rows}</ul></div>`;
     }).join("");
-    return `<div class="card"><h3>${companyAvatar(c.id, c.name, 26)}${c.name}<span class="c-count">${c.prices.length} პროდუქტი</span></h3><ul>${rows}</ul></div>`;
+    return;
+  }
+
+  /* გუშინ / გუშინწინ — დღის ბოლოს მდგომარეობა ისტორიიდან */
+  const targetDate = shiftDate(todayStr, -G.day);
+  const snap = G.history.find(h => h.date === targetDate);
+  if (!snap) {
+    note.textContent = "";
+    el.innerHTML = `<div class="chart-empty">ამ დღის (${fmtDate(targetDate)}) მონაცემები ჯერ არ არსებობს — ისტორია ${fmtDate(G.history[0]?.date || targetDate)}-იდან გროვდება.</div>`;
+    return;
+  }
+  const prevSnap = G.history.find(h => h.date === shiftDate(targetDate, -1)) || null;
+  note.textContent = `მდგომარეობა დღის ბოლოს — ${fmtDate(targetDate)}${snap.time ? ` (ბოლო ჩანაწერი ${fmtDateTime(snap.time)})` : ""} · ცვლილება წინა დღესთან`;
+
+  /* კომპანიები დალაგებული იმ დღის რეგულარის მინიმუმით */
+  const ids = Object.keys(snap.products || {}).sort((a, b) =>
+    (snap.prices?.[a]?.regular ?? Infinity) - (snap.prices?.[b]?.regular ?? Infinity));
+
+  el.innerHTML = ids.map(cid => {
+    const name = snap.names?.[cid] || cid;
+    const prods = Object.entries(snap.products[cid]);
+    const rows = prods.map(([n, price]) => {
+      const prevV = prevSnap?.products?.[cid]?.[n];
+      const ts = dayChangeTs(targetDate, cid, n);
+      return `<li><span class="n">${n}</span><span class="p">${fmtPrice(price)} ₾${deltaChip(price, prevV)}${changedAt(ts)}</span></li>`;
+    }).join("");
+    return `<div class="card"><h3>${companyAvatar(cid, name, 26)}${name}<span class="c-count">${prods.length} პროდუქტი</span></h3><ul>${rows}</ul></div>`;
   }).join("");
 }
 
-/* თიზერ-გრაფიკი: რეგულარის ქვეყნის მინიმუმი დროში (ბიტკოინის სტილის area) */
+/* ---------- თიზერ-გრაფიკი ---------- */
+
 function renderTeaser(history) {
   const el = document.getElementById("teaser-chart");
   const pts = history
@@ -155,16 +225,20 @@ async function main() {
     document.getElementById("updated").textContent = "მონაცემები ვერ ჩაიტვირთა.";
     return;
   }
-  const { latest, history } = data;
-  const prev = prevSnapshot(history);
+  G.latest = data.latest;
+  G.history = data.history;
+  G.changes = data.changes;
+  G.lastChange = lastChangeMap(data.changes);
+  const prev = prevSnapshot(G.history);
 
   document.getElementById("updated").textContent =
-    `ბოლო განახლება: ${renderUpdatedText(latest.updated)} (თბილისის დროით)`;
-  renderTicker(latest, prev);
-  renderTiles(latest, history, prev);
-  renderTable(latest, prev);
-  renderCards(latest, prev);
-  renderTeaser(history);
+    `ბოლო განახლება: ${renderUpdatedText(G.latest.updated)} (თბილისის დროით)`;
+  renderTicker(G.latest, prev);
+  renderTiles(G.latest, G.history, prev);
+  renderTable(G.latest, prev);
+  renderDayFilters();
+  renderCards();
+  renderTeaser(G.history);
 }
 
 main();

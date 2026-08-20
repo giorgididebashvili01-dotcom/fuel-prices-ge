@@ -21,6 +21,7 @@
   --up: #ef4655;          /* გაძვირდა — წითელი */
   --down-bg: rgba(34, 197, 139, 0.12);
   --up-bg: rgba(239, 70, 85, 0.12);
+  --silver: #b9c2cf;      /* ცვლილების დროის ჭდე */
 }
 
 * { box-sizing: border-box; }
@@ -99,6 +100,17 @@ h2 .borjgali { color: var(--wine); flex: none; }
 .delta.down { color: var(--down); }
 .delta.up { color: var(--up); }
 .delta.flat, .delta.na { color: var(--text-muted); font-weight: 500; }
+
+.changed-at {
+  color: var(--silver); font-size: 0.7rem; font-weight: 500;
+  font-variant-numeric: tabular-nums; white-space: nowrap; opacity: 0.85;
+}
+td .changed-at { display: block; margin-top: 1px; }
+.card li .p .changed-at { display: block; margin-top: 1px; }
+
+/* დღის გადამრთველი ბარათების თავზე */
+.day-filters { margin: 0 0 14px; }
+.day-note { color: var(--text-muted); font-size: 0.82rem; margin: -6px 0 12px; }
 
 .avatar {
   border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
@@ -241,7 +253,7 @@ td.na { color: var(--text-muted); }
   background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
   margin-bottom: 8px;
 }
-.changelog .cl-date { color: var(--text-muted); font-size: 0.78rem; min-width: 52px; }
+.changelog .cl-date { color: var(--text-muted); font-size: 0.78rem; min-width: 86px; }
 .changelog .cl-co { font-weight: 700; display: flex; align-items: center; gap: 7px; }
 .changelog .cl-prod { color: var(--text-2); }
 .changelog .cl-move { margin-left: auto; font-variant-numeric: tabular-nums; color: var(--text-2); white-space: nowrap; }

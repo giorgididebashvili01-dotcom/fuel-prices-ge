@@ -272,53 +272,31 @@ function attachHover(series, dates, x, y, dims) {
 
 function renderChangelog() {
   const el = document.getElementById("changelog");
-  const hist = rangedHistory();
   const ids = new Set(activeCompanyIds());
-  const events = [];
+  const r = RANGES.find(r => r.id === state.range);
+  const cutoff = r && r.days !== Infinity
+    ? new Date(Date.now() - r.days * 86400000).toISOString()
+    : "";
 
-  for (let i = 1; i < hist.length; i++) {
-    const prev = hist[i - 1], cur = hist[i];
-    for (const [cid, prods] of Object.entries(cur.products || {})) {
-      if (!ids.has(cid)) continue;
-      for (const [name, price] of Object.entries(prods)) {
-        const prevP = prev.products?.[cid]?.[name];
-        if (prevP == null || Math.abs(price - prevP) < 0.005) continue;
-        /* კატეგორიის ფილტრი პროდუქტის სახელით — იგივე ლოგიკა, რაც სკრეიპერშია */
-        if (state.cat !== catOfName(name)) continue;
-        events.push({ date: cur.date, cid, co: cur.names?.[cid] || cid, name, from: prevP, to: price });
-      }
-    }
-  }
+  /* ზუსტი დროებით — changes.json-იდან */
+  const events = (state.changes || [])
+    .filter(e => ids.has(e.c) && e.cat === state.cat && e.t >= cutoff)
+    .sort((a, b) => b.t.localeCompare(a.t))
+    .slice(0, 25);
 
-  events.sort((a, b) => b.date.localeCompare(a.date));
-  const top = events.slice(0, 20);
-
-  if (!top.length) {
+  if (!events.length) {
     el.innerHTML = `<li><span class="cl-prod">ცვლილებები ჯერ არ დაფიქსირებულა — ჟურნალი ისტორიასთან ერთად შეივსება.</span></li>`;
     return;
   }
-  el.innerHTML = top.map(ev => {
-    const d = ev.to - ev.from;
-    const chip = deltaChip(ev.to, ev.from);
+  el.innerHTML = events.map(ev => {
+    const co = state.allCompanies.find(c => c.id === ev.c)?.name || ev.c;
     return `<li>
-      <span class="cl-date">${fmtDate(ev.date)}</span>
-      <span class="cl-co"><span class="dot" style="background:${seriesColor(ev.cid)}"></span>${ev.co}</span>
-      <span class="cl-prod">${ev.name}</span>
-      <span class="cl-move">${fmtPrice(ev.from)} → <b>${fmtPrice(ev.to)}</b> ${chip}</span>
+      <span class="cl-date"><span class="changed-at">${fmtDateTime(ev.t)}</span></span>
+      <span class="cl-co"><span class="dot" style="background:${seriesColor(ev.c)}"></span>${co}</span>
+      <span class="cl-prod">${ev.n}</span>
+      <span class="cl-move">${fmtPrice(ev.from)} → <b>${fmtPrice(ev.to)}</b> ${deltaChip(ev.to, ev.from)}</span>
     </li>`;
   }).join("");
-}
-
-/* კატეგორია პროდუქტის სახელიდან (სკრეიპერის ლოგიკის ასლი) */
-function catOfName(name) {
-  const n = name.toLowerCase();
-  if (/(გაზ|gas|lpg|cng|ბუნებრივი|თხევადი)/.test(n)) return "gas";
-  if (/(დიზელ|diesel|dizel)/.test(n)) return "diesel";
-  if (/(სუპერ|super)/.test(n)) return "super";
-  if (/(პრემიუმ|premium|avangard|ავანგარდ)/.test(n)) return "premium";
-  if (/(რეგულარ|regular)/.test(n)) return "regular";
-  if (/(ევრო|euro)/.test(n)) return "regular";
-  return "other";
 }
 
 /* ---------- მთავარი ---------- */
@@ -343,6 +321,7 @@ async function main() {
   }
   state.latest = data.latest;
   state.history = data.history;
+  state.changes = data.changes;
   state.allCompanies = data.latest.companies.map(c => ({ id: c.id, name: c.name }));
 
   document.getElementById("updated").textContent =
