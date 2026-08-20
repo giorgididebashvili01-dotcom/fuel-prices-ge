@@ -32,7 +32,13 @@ jobs:
           if ! git diff --quiet -- data; then
             git add data
             git commit -m "Update fuel prices ($(date -u +'%Y-%m-%d %H:%M UTC'))"
-            git push
+            n=0
+            until git push; do
+              n=$((n+1))
+              if [ $n -ge 3 ]; then echo "Push failed after 3 attempts"; exit 1; fi
+              echo "Push rejected, rebasing onto remote (attempt $n)..."
+              git pull --rebase -X theirs origin main
+            done
           else
             echo "No price changes."
           fi
