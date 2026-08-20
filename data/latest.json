@@ -1,8 +1,7 @@
 {
-  "updated": "2026-08-20T19:14:01.477Z",
+  "updated": "2026-08-20T21:49:39.808Z",
   "errors": [
-    "Gulf: https://gulf.ge/ge/fuel_prices -> HTTP 403",
-    "Rompetrol: https://www.rompetrol.ge/ -> HTTP 403"
+    "Gulf: gulf: ცხრილის რიგი ვერ მოიძებნა"
   ],
   "companies": [
     {
@@ -49,32 +48,32 @@
       "prices": [
         {
           "name": "Eko Super",
-          "price": 4.23,
+          "price": 4.26,
           "category": "super"
         },
         {
           "name": "Eko Premium",
-          "price": 3.82,
+          "price": 3.85,
           "category": "premium"
         },
         {
           "name": "Eko Diesel",
-          "price": 4.39,
+          "price": 4.44,
           "category": "diesel"
         },
         {
           "name": "Euro Diesel",
-          "price": 4.34,
+          "price": 4.39,
           "category": "diesel"
         },
         {
           "name": "Euro Regular",
-          "price": 3.68,
+          "price": 3.71,
           "category": "regular"
         },
         {
           "name": "Diesel Energy",
-          "price": 4.29,
+          "price": 4.34,
           "category": "diesel"
         },
         {
@@ -84,7 +83,7 @@
         },
         {
           "name": "A1 SUPER 100",
-          "price": 4.32,
+          "price": 4.35,
           "category": "super"
         }
       ]
