@@ -32,14 +32,16 @@ function fmtDate(iso) {
 }
 
 async function loadData() {
-  const [latest, history, changes] = await Promise.all([
+  const [latest, history, changes, market] = await Promise.all([
     fetch("data/latest.json").then(r => r.json()),
     fetch("data/history.json").then(r => r.json()).catch(() => []),
     fetch("data/changes.json").then(r => r.json()).catch(() => []),
+    fetch("data/market.json").then(r => r.json()).catch(() => []),
   ]);
   history.sort((a, b) => a.date.localeCompare(b.date));
   changes.sort((a, b) => a.t.localeCompare(b.t));
-  return { latest, history, changes };
+  market.sort((a, b) => a.date.localeCompare(b.date));
+  return { latest, history, changes, market };
 }
 
 /* თბილისის დროით: "20 აგვ, 11:13" */

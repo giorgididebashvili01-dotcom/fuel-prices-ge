@@ -127,6 +127,8 @@ const COMPANIES = [
 
 const results = [];
 const errors = [];
+const latestPathEarly = join(DATA, "latest.json");
+const oldLatest = existsSync(latestPathEarly) ? JSON.parse(readFileSync(latestPathEarly, "utf8")) : null;
 
 for (const c of COMPANIES) {
   try {
@@ -136,6 +138,12 @@ for (const c of COMPANIES) {
   } catch (e) {
     errors.push(`${c.name}: ${e.message}`);
     console.error(`ERR ${c.name}: ${e.message}`);
+    /* დროებითი ჩავარდნისას (403 და მისთ.) ძველი ფასები რჩება — საიტიდან კომპანია არ ქრება */
+    const prev = oldLatest?.companies?.find((x) => x.id === c.id);
+    if (prev) {
+      results.push(prev);
+      console.log(`↻  ${c.name}: წინა მონაცემი შენარჩუნდა`);
+    }
   }
 }
 
@@ -145,6 +153,46 @@ if (results.length === 0) {
 }
 
 const now = new Date();
+
+/* ბაზრის კონტექსტი: Brent-ის ფასი და USD/GEL კურსი — ჯიხურის ფასების წინმსწრები ფაქტორები */
+async function fetchMarket() {
+  const marketPath = join(DATA, "market.json");
+  const market = existsSync(marketPath) ? JSON.parse(readFileSync(marketPath, "utf8")) : [];
+  const byDate = new Map(market.map((m) => [m.date, m]));
+  try {
+    const y = await fetch("https://query1.finance.yahoo.com/v8/finance/chart/BZ=F?range=1mo&interval=1d", {
+      headers: { "User-Agent": UA },
+    }).then((r) => r.json());
+    const res = y.chart.result[0];
+    const ts = res.timestamp || [];
+    const closes = res.indicators.quote[0].close || [];
+    ts.forEach((t, i) => {
+      if (closes[i] == null) return;
+      const d = new Date(t * 1000).toISOString().slice(0, 10);
+      const e = byDate.get(d) || { date: d };
+      e.brent = Math.round(closes[i] * 100) / 100;
+      byDate.set(d, e);
+    });
+  } catch (e) {
+    console.error("brent:", e.message);
+  }
+  try {
+    const n = await fetch("https://nbg.gov.ge/gw/api/ct/monetarypolicy/currencies/ka/json/?currencies=USD").then((r) => r.json());
+    const cur = n[0]?.currencies?.[0];
+    if (cur?.rate) {
+      const d = now.toISOString().slice(0, 10);
+      const e = byDate.get(d) || { date: d };
+      e.usdgel = cur.rate;
+      byDate.set(d, e);
+    }
+  } catch (e) {
+    console.error("nbg:", e.message);
+  }
+  const merged = [...byDate.values()].sort((a, b) => a.date.localeCompare(b.date)).slice(-120);
+  writeFileSync(marketPath, JSON.stringify(merged));
+  console.log(`ბაზარი: ${merged.length} დღის კონტექსტი`);
+}
+await fetchMarket();
 
 /* ცვლილებების მუდმივი ჟურნალი — ყოველი ფასის ცვლილება ზუსტი დროით */
 const changesPath = join(DATA, "changes.json");

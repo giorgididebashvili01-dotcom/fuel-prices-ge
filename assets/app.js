@@ -163,6 +163,61 @@ function renderCards() {
   }).join("");
 }
 
+/* ---------- „ჩავასხა თუ მოვიცადო?" ინდიკატორი ---------- */
+
+function renderSignal() {
+  const rowsEl = document.getElementById("sig-rows");
+  const stripEl = document.getElementById("market-strip");
+
+  /* კატეგორიების ტრენდები ისტორიიდან */
+  const rows = CATEGORIES.map(cat => {
+    const series = G.history.map(h => snapCountryMin(h, cat.id)).filter(v => v != null);
+    if (series.length < 4) return null;
+    const win = series.slice(-7);
+    const diff = win[win.length - 1] - win[0];
+    const cur = series[series.length - 1];
+    const min30 = Math.min(...series.slice(-30));
+    const atLow = cur <= min30 + 0.005;
+
+    let icon, cls, text;
+    if (diff <= -0.02) {
+      icon = "▼"; cls = "down";
+      text = `კლების ტრენდია (${win.length} დღეში ${diff.toFixed(2)}) — თუ არ გეჩქარება, მოცდა ლოგიკურია`;
+    } else if (diff >= 0.02) {
+      icon = "▲"; cls = "up";
+      text = `მატების ტრენდია (${win.length} დღეში +${diff.toFixed(2)}) — გადადება რისკიანია`;
+    } else {
+      icon = "▬"; cls = "flat";
+      text = "სტაბილურია — დღეს თუ ხვალ, განსხვავება უმნიშვნელოა";
+    }
+    if (atLow) text += " · ფასი ბოლო 30 დღის მინიმუმთანაა ✦";
+    return `<div class="sig-row"><span class="sig-cat">${cat.label}</span><span class="sig-verdict ${cls}">${icon} ${text}</span></div>`;
+  }).filter(Boolean);
+
+  rowsEl.innerHTML = rows.length
+    ? rows.join("")
+    : `<div class="chart-empty">ტრენდის დასადგენად მინიმუმ 4 დღის ისტორიაა საჭირო — ინდიკატორი რამდენიმე დღეში ჩაირთვება. ბაზრის კონტექსტი კი უკვე მუშაობს ↓</div>`;
+
+  /* ბაზრის კონტექსტი: Brent + USD/GEL, 14-დღიანი ცვლილება */
+  function ctx(key, label, unit) {
+    const s = G.market.filter(m => m[key] != null);
+    if (s.length < 2) return "";
+    const last = s[s.length - 1];
+    const cutoff = shiftDate(last.date, -14);
+    const base = s.find(m => m.date >= cutoff) || s[0];
+    const pct = ((last[key] - base[key]) / base[key]) * 100;
+    const up = pct > 0.3, down = pct < -0.3;
+    const cls = up ? "up" : down ? "down" : "flat";
+    const arrow = up ? "▲" : down ? "▼" : "▬";
+    return `<span class="m-item"><span class="m-label">${label}</span><b>${last[key].toFixed(2)}${unit}</b><span class="delta ${cls}">${arrow} ${Math.abs(pct).toFixed(1)}%</span></span>`;
+  }
+  const brent = ctx("brent", "ნავთობი Brent", "$");
+  const gel = ctx("usdgel", "დოლარი", "₾");
+  stripEl.innerHTML = (brent || gel)
+    ? brent + gel + `<span class="m-note">14-დღიანი ცვლილება · ეს ფაქტორები ჯიხურის ფასს ~2–3 კვირაში აღწევს</span>`
+    : "";
+}
+
 /* ---------- თიზერ-გრაფიკი ---------- */
 
 function renderTeaser(history) {
@@ -228,6 +283,7 @@ async function main() {
   G.latest = data.latest;
   G.history = data.history;
   G.changes = data.changes;
+  G.market = data.market;
   G.lastChange = lastChangeMap(data.changes);
   const prev = prevSnapshot(G.history);
 
@@ -235,6 +291,7 @@ async function main() {
     `ბოლო განახლება: ${renderUpdatedText(G.latest.updated)} (თბილისის დროით)`;
   renderTicker(G.latest, prev);
   renderTiles(G.latest, G.history, prev);
+  renderSignal();
   renderTable(G.latest, prev);
   renderDayFilters();
   renderCards();

@@ -112,6 +112,27 @@ td .changed-at { display: block; margin-top: 1px; }
 .day-filters { margin: 0 0 14px; }
 .day-note { color: var(--text-muted); font-size: 0.82rem; margin: -6px 0 12px; }
 
+/* „ჩავასხა თუ მოვიცადო?" პანელი */
+.signal { padding: 8px 18px 14px; }
+.sig-row {
+  display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
+  padding: 10px 0; border-bottom: 1px solid var(--grid);
+}
+.sig-row:last-child { border-bottom: 0; }
+.sig-cat { font-weight: 800; min-width: 92px; }
+.sig-verdict { font-size: 0.9rem; }
+.sig-verdict.down { color: var(--down); }
+.sig-verdict.up { color: var(--up); }
+.sig-verdict.flat { color: var(--text-2); }
+.market-strip {
+  display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+  margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border);
+}
+.m-item { display: inline-flex; align-items: baseline; gap: 8px; font-size: 0.9rem; }
+.m-item .m-label { color: var(--text-muted); font-size: 0.8rem; }
+.m-item b { font-variant-numeric: tabular-nums; }
+.m-note { color: var(--text-muted); font-size: 0.75rem; }
+
 .avatar {
   border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
   font-weight: 800; font-size: 0.88rem; flex: none;
