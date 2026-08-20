@@ -1,44 +1,9 @@
 {
-  "updated": "2026-08-20T13:23:37.735Z",
-  "errors": [],
+  "updated": "2026-08-20T15:54:19.099Z",
+  "errors": [
+    "Gulf: https://gulf.ge/ge/fuel_prices -> HTTP 403"
+  ],
   "companies": [
-    {
-      "id": "gulf",
-      "name": "Gulf",
-      "url": "https://gulf.ge/ge/fuel_prices",
-      "prices": [
-        {
-          "name": "G-Force სუპერი",
-          "price": 4.27,
-          "category": "super"
-        },
-        {
-          "name": "G-Force პრემიუმი",
-          "price": 3.83,
-          "category": "premium"
-        },
-        {
-          "name": "G-Force ევრო რეგულარი",
-          "price": 3.65,
-          "category": "regular"
-        },
-        {
-          "name": "ევრო რეგულარი",
-          "price": 3.65,
-          "category": "regular"
-        },
-        {
-          "name": "G-Force ევრო დიზელი",
-          "price": 4.33,
-          "category": "diesel"
-        },
-        {
-          "name": "ევრო დიზელი",
-          "price": 4.23,
-          "category": "diesel"
-        }
-      ]
-    },
     {
       "id": "wissol",
       "name": "Wissol",
