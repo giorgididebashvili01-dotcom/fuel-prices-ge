@@ -1,6 +1,8 @@
 {
-  "updated": "2026-08-21T16:36:12.989Z",
-  "errors": [],
+  "updated": "2026-08-21T16:37:09.664Z",
+  "errors": [
+    "Gulf: https://r.jina.ai/https://gulf.ge/ge/fuel_prices -> HTTP 403"
+  ],
   "companies": [
     {
       "id": "gulf",
