@@ -54,24 +54,44 @@ const COMPANIES = [
     name: "Gulf",
     url: "https://gulf.ge/ge/fuel_prices",
     async parse() {
-      /* Cloudflare node-ის fetch-ს TLS-ნაკვალევით ბლოკავს — curl გადის */
-      let html = execFileSync("curl", [
-        "-s", "--max-time", "30",
-        "-A", UA,
-        "-H", "Accept: text/html,application/xhtml+xml",
-        "-H", "Accept-Language: ka-GE,ka;q=0.9,en;q=0.8",
-        "-H", "Referer: https://gulf.ge/ge",
-        this.url,
-      ], { encoding: "utf8", maxBuffer: 10e6 });
-      if (!html || html.length < 1000) throw new Error("gulf: ცარიელი ან დაბლოკილი პასუხი");
-      html = html.replace(/<!--[\s\S]*?-->/g, "");
-      const names = [...html.matchAll(/<span class="normal">([^<]+)<\/span>/g)]
-        .map((m) => m[1].trim())
-        .slice(1); // პირველი სვეტი თარიღია
-      const rowM = html.match(/<tr class="prices_cnt (?:odd|even)"[^>]*>([\s\S]*?)<\/tr>/);
-      if (!rowM) throw new Error("gulf: ცხრილის რიგი ვერ მოიძებნა");
-      const cells = [...rowM[1].matchAll(/<td[^>]*><span>([^<]*)<\/span>/g)].map((m) => m[1].trim());
-      return names.map((n, i) => ({ name: n, price: parseFloat(cells[i + 1]) }));
+      /* Cloudflare node-ის fetch-ს TLS-ნაკვალევით ბლოკავს — curl გადის (ლოკალურად) */
+      try {
+        let html = execFileSync("curl", [
+          "-s", "--max-time", "30",
+          "-A", UA,
+          "-H", "Accept: text/html,application/xhtml+xml",
+          "-H", "Accept-Language: ka-GE,ka;q=0.9,en;q=0.8",
+          "-H", "Referer: https://gulf.ge/ge",
+          this.url,
+        ], { encoding: "utf8", maxBuffer: 10e6 });
+        if (!html || html.length < 1000) throw new Error("gulf: ცარიელი ან დაბლოკილი პასუხი");
+        html = html.replace(/<!--[\s\S]*?-->/g, "");
+        const names = [...html.matchAll(/<span class="normal">([^<]+)<\/span>/g)]
+          .map((m) => m[1].trim())
+          .slice(1); // პირველი სვეტი თარიღია
+        const rowM = html.match(/<tr class="prices_cnt (?:odd|even)"[^>]*>([\s\S]*?)<\/tr>/);
+        if (!rowM) throw new Error("gulf: ცხრილის რიგი ვერ მოიძებნა");
+        const cells = [...rowM[1].matchAll(/<td[^>]*><span>([^<]*)<\/span>/g)].map((m) => m[1].trim());
+        return names.map((n, i) => ({ name: n, price: parseFloat(cells[i + 1]) }));
+      } catch (e) {
+        console.error(`gulf პირდაპირ: ${e.message} — ვცდი სათადარიგო არხს`);
+        return await this.parseViaReader();
+      }
+    },
+    /* სათადარიგო არხი: r.jina.ai კითხულობს გვერდს თავისი სერვერებიდან, რომლებსაც
+       Cloudflare არ ბლოკავს (GitHub Actions-ის IP-ები დაბლოკილია). აბრუნებს markdown-ს:
+       header-ში ბმულები sort= პარამეტრით, ქვემოთ რიგები "2026-08-21 4.27 3.83 ..." */
+    async parseViaReader() {
+      const md = await fetchHtml("https://r.jina.ai/" + this.url);
+      const headM = md.match(/\[თარიღი\]\([^)]*\)((?:\[[^\]]+\]\([^)]*sort=[^)]*\))+)/);
+      if (!headM) throw new Error("gulf-reader: სვეტების სათაურები ვერ მოიძებნა");
+      const names = [...headM[1].matchAll(/\[([^\]]+)\]/g)]
+        .map((m) => m[1].trim().replace(/\s+[A-Z]{2,4}$/, "")); // "G-Force სუპერი GS" -> "G-Force სუპერი"
+      const rowM = md.match(/^\d{4}-\d{2}-\d{2}((?:\s+\d+\.\d{2})+)\s*$/m);
+      if (!rowM) throw new Error("gulf-reader: ფასების რიგი ვერ მოიძებნა");
+      const cells = rowM[1].trim().split(/\s+/).map(parseFloat);
+      if (cells.length !== names.length) throw new Error(`gulf-reader: ${names.length} სვეტი, ${cells.length} ფასი`);
+      return names.map((n, i) => ({ name: n, price: cells[i] }));
     },
   },
   {

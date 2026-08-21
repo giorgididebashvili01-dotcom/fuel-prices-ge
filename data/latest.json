@@ -1,8 +1,6 @@
 {
-  "updated": "2026-08-21T15:54:49.317Z",
-  "errors": [
-    "Gulf: gulf: ცხრილის რიგი ვერ მოიძებნა"
-  ],
+  "updated": "2026-08-21T16:36:12.989Z",
+  "errors": [],
   "companies": [
     {
       "id": "gulf",
@@ -31,12 +29,12 @@
         },
         {
           "name": "G-Force ევრო დიზელი",
-          "price": 4.33,
+          "price": 4.37,
           "category": "diesel"
         },
         {
           "name": "ევრო დიზელი",
-          "price": 4.23,
+          "price": 4.27,
           "category": "diesel"
         }
       ]
