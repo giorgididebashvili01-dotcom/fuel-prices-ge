@@ -65,18 +65,27 @@ const COMPANIES = [
           this.url,
         ], { encoding: "utf8", maxBuffer: 10e6 });
         if (!html || html.length < 1000) throw new Error("gulf: ცარიელი ან დაბლოკილი პასუხი");
-        html = html.replace(/<!--[\s\S]*?-->/g, "");
-        const names = [...html.matchAll(/<span class="normal">([^<]+)<\/span>/g)]
-          .map((m) => m[1].trim())
-          .slice(1); // პირველი სვეტი თარიღია
-        const rowM = html.match(/<tr class="prices_cnt (?:odd|even)"[^>]*>([\s\S]*?)<\/tr>/);
-        if (!rowM) throw new Error("gulf: ცხრილის რიგი ვერ მოიძებნა");
-        const cells = [...rowM[1].matchAll(/<td[^>]*><span>([^<]*)<\/span>/g)].map((m) => m[1].trim());
-        return names.map((n, i) => ({ name: n, price: parseFloat(cells[i + 1]) }));
+        return this.parseHtml(html);
       } catch (e) {
         console.error(`gulf პირდაპირ: ${e.message} — ვცდი სათადარიგო არხს`);
-        return await this.parseViaReader();
       }
+      try {
+        return await this.parseViaReader();
+      } catch (e) {
+        console.error(`gulf-reader: ${e.message} — ვცდი არქივს`);
+      }
+      return await this.parseViaWayback();
+    },
+    /* გვერდის HTML-ის პარსინგი — ერთნაირად მუშაობს პირდაპირ და Wayback-ის ასლზე */
+    parseHtml(html) {
+      html = html.replace(/<!--[\s\S]*?-->/g, "");
+      const names = [...html.matchAll(/<span class="normal">([^<]+)<\/span>/g)]
+        .map((m) => m[1].trim())
+        .slice(1); // პირველი სვეტი თარიღია
+      const rowM = html.match(/<tr class="prices_cnt (?:odd|even)"[^>]*>([\s\S]*?)<\/tr>/);
+      if (!rowM) throw new Error("gulf: ცხრილის რიგი ვერ მოიძებნა");
+      const cells = [...rowM[1].matchAll(/<td[^>]*><span>([^<]*)<\/span>/g)].map((m) => m[1].trim());
+      return names.map((n, i) => ({ name: n, price: parseFloat(cells[i + 1]) }));
     },
     /* სათადარიგო არხი: r.jina.ai კითხულობს გვერდს თავისი სერვერებიდან, რომლებსაც
        Cloudflare არ ბლოკავს (GitHub Actions-ის IP-ები დაბლოკილია). აბრუნებს markdown-ს:
@@ -92,6 +101,19 @@ const COMPANIES = [
       const cells = rowM[1].trim().split(/\s+/).map(parseFloat);
       if (cells.length !== names.length) throw new Error(`gulf-reader: ${names.length} სვეტი, ${cells.length} ფასი`);
       return names.map((n, i) => ({ name: n, price: cells[i] }));
+    },
+    /* მესამე არხი: Wayback Machine — მისი კრაულერი Cloudflare-ს გაივლის.
+       ვთხოვთ ახალ სნეპშოტს, ვიცდით, მერე ვკითხულობთ უახლესს (ძველიც ≤3სთ-იანია,
+       რადგან ყოველი გაშვება save-ს ითხოვს) */
+    async parseViaWayback() {
+      try {
+        await fetch("https://web.archive.org/save/" + this.url, {
+          headers: { "User-Agent": UA }, redirect: "manual",
+        });
+        await new Promise((r) => setTimeout(r, 45000));
+      } catch { /* save ვერ მოხერხდა — მაინც წავიკითხოთ უახლესი არსებული */ }
+      const html = await fetchHtml("https://web.archive.org/web/2/" + this.url);
+      return this.parseHtml(html);
     },
   },
   {
