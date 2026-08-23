@@ -1,6 +1,8 @@
 {
-  "updated": "2026-08-23T15:43:57.870Z",
-  "errors": [],
+  "updated": "2026-08-23T18:55:04.344Z",
+  "errors": [
+    "SOCAR: terminated"
+  ],
   "companies": [
     {
       "id": "gulf",
