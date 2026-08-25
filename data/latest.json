@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-25T04:06:56.425Z",
+  "updated": "2026-08-25T07:15:55.949Z",
   "errors": [],
   "companies": [
     {
@@ -9,32 +9,32 @@
       "prices": [
         {
           "name": "G-Force სუპერი",
-          "price": 4.27,
+          "price": 4.29,
           "category": "super"
         },
         {
           "name": "G-Force პრემიუმი",
-          "price": 3.83,
+          "price": 3.87,
           "category": "premium"
         },
         {
           "name": "G-Force ევრო რეგულარი",
-          "price": 3.65,
+          "price": 3.69,
           "category": "regular"
         },
         {
           "name": "ევრო რეგულარი",
-          "price": 3.65,
+          "price": 3.69,
           "category": "regular"
         },
         {
           "name": "G-Force ევრო დიზელი",
-          "price": 4.37,
+          "price": 4.47,
           "category": "diesel"
         },
         {
           "name": "ევრო დიზელი",
-          "price": 4.27,
+          "price": 4.37,
           "category": "diesel"
         }
       ]
