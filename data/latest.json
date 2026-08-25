@@ -1,6 +1,8 @@
 {
-  "updated": "2026-08-25T16:07:19.896Z",
-  "errors": [],
+  "updated": "2026-08-25T19:06:51.364Z",
+  "errors": [
+    "Gulf: fetch failed"
+  ],
   "companies": [
     {
       "id": "gulf",
