@@ -1,8 +1,6 @@
 {
-  "updated": "2026-08-26T07:16:00.031Z",
-  "errors": [
-    "Gulf: fetch failed"
-  ],
+  "updated": "2026-08-26T10:03:22.098Z",
+  "errors": [],
   "companies": [
     {
       "id": "gulf",
@@ -127,27 +125,27 @@
       "prices": [
         {
           "name": "ნანო სუპერი",
-          "price": 4.24,
+          "price": 4.26,
           "category": "super"
         },
         {
           "name": "ნანო პრემიუმი",
-          "price": 3.8,
+          "price": 3.84,
           "category": "premium"
         },
         {
           "name": "ნანო ევრო რეგულარი",
-          "price": 3.63,
+          "price": 3.67,
           "category": "regular"
         },
         {
           "name": "ევრო 5 დიზელი",
-          "price": 4.2,
+          "price": 4.3,
           "category": "diesel"
         },
         {
           "name": "ნანო ევრო 5 დიზელი",
-          "price": 4.3,
+          "price": 4.4,
           "category": "diesel"
         },
         {
