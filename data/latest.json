@@ -1,6 +1,8 @@
 {
-  "updated": "2026-08-26T04:08:50.985Z",
-  "errors": [],
+  "updated": "2026-08-26T07:16:00.031Z",
+  "errors": [
+    "Gulf: fetch failed"
+  ],
   "companies": [
     {
       "id": "gulf",
@@ -93,27 +95,27 @@
       "prices": [
         {
           "name": "efix სუპერი",
-          "price": 4.27,
+          "price": 4.3,
           "category": "super"
         },
         {
           "name": "efix ევრო პრემიუმი",
-          "price": 3.83,
+          "price": 3.88,
           "category": "premium"
         },
         {
           "name": "efix ევრო რეგულარი",
-          "price": 3.64,
+          "price": 3.68,
           "category": "regular"
         },
         {
           "name": "efix ევრო დიზელი",
-          "price": 4.36,
+          "price": 4.46,
           "category": "diesel"
         },
         {
           "name": "ევრო დიზელი",
-          "price": 4.29,
+          "price": 4.39,
           "category": "diesel"
         }
       ]
