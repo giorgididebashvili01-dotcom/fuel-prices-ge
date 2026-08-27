@@ -1,8 +1,6 @@
 {
-  "updated": "2026-08-27T00:54:06.632Z",
-  "errors": [
-    "Gulf: fetch failed"
-  ],
+  "updated": "2026-08-27T14:22:50.675Z",
+  "errors": [],
   "companies": [
     {
       "id": "gulf",
@@ -142,12 +140,12 @@
         },
         {
           "name": "ევრო 5 დიზელი",
-          "price": 4.3,
+          "price": 4.34,
           "category": "diesel"
         },
         {
           "name": "ნანო ევრო 5 დიზელი",
-          "price": 4.4,
+          "price": 4.44,
           "category": "diesel"
         },
         {
@@ -169,22 +167,22 @@
       "prices": [
         {
           "name": "Super Ecto",
-          "price": 4.24,
+          "price": 4.27,
           "category": "super"
         },
         {
           "name": "Premium Avangard",
-          "price": 3.81,
+          "price": 3.86,
           "category": "premium"
         },
         {
           "name": "Euro Regular",
-          "price": 3.66,
+          "price": 3.7,
           "category": "regular"
         },
         {
           "name": "Euro Diesel",
-          "price": 4.4,
+          "price": 4.45,
           "category": "diesel"
         }
       ]
