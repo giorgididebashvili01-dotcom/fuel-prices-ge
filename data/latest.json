@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-26T20:20:29.837Z",
+  "updated": "2026-08-27T00:54:06.632Z",
   "errors": [
     "Gulf: fetch failed"
   ],
@@ -196,17 +196,17 @@
       "prices": [
         {
           "name": "SUPER",
-          "price": 3.89,
+          "price": 3.99,
           "category": "super"
         },
         {
           "name": "PREMIUM",
-          "price": 3.73,
+          "price": 3.79,
           "category": "premium"
         },
         {
           "name": "EURO REGULAR",
-          "price": 3.58,
+          "price": 3.63,
           "category": "regular"
         },
         {
