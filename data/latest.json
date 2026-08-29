@@ -1,8 +1,6 @@
 {
-  "updated": "2026-08-28T15:31:29.935Z",
-  "errors": [
-    "Gulf: fetch failed"
-  ],
+  "updated": "2026-08-29T01:49:54.418Z",
+  "errors": [],
   "companies": [
     {
       "id": "gulf",
@@ -211,12 +209,12 @@
         },
         {
           "name": "EURO DIESEL",
-          "price": 4.24,
+          "price": 4.34,
           "category": "diesel"
         },
         {
           "name": "EFFECT DIESEL",
-          "price": 4.09,
+          "price": 4.19,
           "category": "diesel"
         }
       ]
