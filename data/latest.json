@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-31T14:10:52.048Z",
+  "updated": "2026-08-31T20:54:54.277Z",
   "errors": [
     "Gulf: fetch failed"
   ],
@@ -48,22 +48,22 @@
       "prices": [
         {
           "name": "Eko Super",
-          "price": 4.26,
+          "price": 4.29,
           "category": "super"
         },
         {
           "name": "Eko Premium",
-          "price": 3.85,
+          "price": 3.88,
           "category": "premium"
         },
         {
           "name": "Eko Diesel",
-          "price": 4.47,
+          "price": 4.49,
           "category": "diesel"
         },
         {
           "name": "Euro Diesel",
-          "price": 4.42,
+          "price": 4.46,
           "category": "diesel"
         },
         {
@@ -73,7 +73,7 @@
         },
         {
           "name": "Diesel Energy",
-          "price": 4.37,
+          "price": 4.42,
           "category": "diesel"
         },
         {
@@ -83,7 +83,7 @@
         },
         {
           "name": "A1 SUPER 100",
-          "price": 4.35,
+          "price": 4.39,
           "category": "super"
         }
       ]
