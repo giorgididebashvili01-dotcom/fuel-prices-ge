@@ -1,8 +1,6 @@
 {
-  "updated": "2026-09-01T00:42:01.290Z",
-  "errors": [
-    "Gulf: fetch failed"
-  ],
+  "updated": "2026-09-01T08:48:07.718Z",
+  "errors": [],
   "companies": [
     {
       "id": "gulf",
@@ -152,7 +150,7 @@
         },
         {
           "name": "თხევადი აირი",
-          "price": 1.75,
+          "price": 1.99,
           "category": "gas"
         },
         {
