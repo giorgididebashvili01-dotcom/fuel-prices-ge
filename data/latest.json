@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-02T04:48:32.426Z",
+  "updated": "2026-09-02T11:31:04.438Z",
   "errors": [],
   "companies": [
     {
@@ -108,12 +108,12 @@
         },
         {
           "name": "efix ევრო დიზელი",
-          "price": 4.46,
+          "price": 4.51,
           "category": "diesel"
         },
         {
           "name": "ევრო დიზელი",
-          "price": 4.39,
+          "price": 4.44,
           "category": "diesel"
         }
       ]
