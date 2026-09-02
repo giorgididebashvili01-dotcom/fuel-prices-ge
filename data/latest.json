@@ -1,6 +1,8 @@
 {
-  "updated": "2026-09-02T11:31:04.438Z",
-  "errors": [],
+  "updated": "2026-09-02T16:43:25.041Z",
+  "errors": [
+    "Rompetrol: https://www.rompetrol.ge/ -> HTTP 403"
+  ],
   "companies": [
     {
       "id": "gulf",
