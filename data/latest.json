@@ -1,8 +1,6 @@
 {
-  "updated": "2026-09-02T16:43:25.041Z",
-  "errors": [
-    "Rompetrol: https://www.rompetrol.ge/ -> HTTP 403"
-  ],
+  "updated": "2026-09-02T21:10:09.325Z",
+  "errors": [],
   "companies": [
     {
       "id": "gulf",
@@ -11,32 +9,32 @@
       "prices": [
         {
           "name": "G-Force სუპერი",
-          "price": 4.29,
+          "price": 4.35,
           "category": "super"
         },
         {
           "name": "G-Force პრემიუმი",
-          "price": 3.87,
+          "price": 3.93,
           "category": "premium"
         },
         {
           "name": "G-Force ევრო რეგულარი",
-          "price": 3.69,
+          "price": 3.75,
           "category": "regular"
         },
         {
           "name": "ევრო რეგულარი",
-          "price": 3.69,
+          "price": 3.75,
           "category": "regular"
         },
         {
           "name": "G-Force ევრო დიზელი",
-          "price": 4.47,
+          "price": 4.53,
           "category": "diesel"
         },
         {
           "name": "ევრო დიზელი",
-          "price": 4.37,
+          "price": 4.43,
           "category": "diesel"
         }
       ]
@@ -58,12 +56,12 @@
         },
         {
           "name": "Eko Diesel",
-          "price": 4.49,
+          "price": 4.52,
           "category": "diesel"
         },
         {
           "name": "Euro Diesel",
-          "price": 4.46,
+          "price": 4.49,
           "category": "diesel"
         },
         {
@@ -73,7 +71,7 @@
         },
         {
           "name": "Diesel Energy",
-          "price": 4.42,
+          "price": 4.45,
           "category": "diesel"
         },
         {
@@ -211,12 +209,12 @@
         },
         {
           "name": "EURO DIESEL",
-          "price": 4.34,
+          "price": 4.44,
           "category": "diesel"
         },
         {
           "name": "EFFECT DIESEL",
-          "price": 4.19,
+          "price": 4.29,
           "category": "diesel"
         }
       ]
