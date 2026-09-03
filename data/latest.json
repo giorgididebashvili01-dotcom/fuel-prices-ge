@@ -1,6 +1,8 @@
 {
-  "updated": "2026-09-02T23:24:45.255Z",
-  "errors": [],
+  "updated": "2026-09-03T04:45:57.809Z",
+  "errors": [
+    "SOCAR: fetch failed"
+  ],
   "companies": [
     {
       "id": "gulf",
