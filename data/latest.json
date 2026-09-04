@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-04T04:47:07.230Z",
+  "updated": "2026-09-04T11:31:02.426Z",
   "errors": [],
   "companies": [
     {
@@ -125,27 +125,27 @@
       "prices": [
         {
           "name": "ნანო სუპერი",
-          "price": 4.26,
+          "price": 4.3,
           "category": "super"
         },
         {
           "name": "ნანო პრემიუმი",
-          "price": 3.84,
+          "price": 3.91,
           "category": "premium"
         },
         {
           "name": "ნანო ევრო რეგულარი",
-          "price": 3.67,
+          "price": 3.72,
           "category": "regular"
         },
         {
           "name": "ევრო 5 დიზელი",
-          "price": 4.34,
+          "price": 4.4,
           "category": "diesel"
         },
         {
           "name": "ნანო ევრო 5 დიზელი",
-          "price": 4.44,
+          "price": 4.5,
           "category": "diesel"
         },
         {
@@ -167,22 +167,22 @@
       "prices": [
         {
           "name": "Super Ecto",
-          "price": 4.27,
+          "price": 4.32,
           "category": "super"
         },
         {
           "name": "Premium Avangard",
-          "price": 3.86,
+          "price": 3.91,
           "category": "premium"
         },
         {
           "name": "Euro Regular",
-          "price": 3.7,
+          "price": 3.75,
           "category": "regular"
         },
         {
           "name": "Euro Diesel",
-          "price": 4.45,
+          "price": 4.52,
           "category": "diesel"
         }
       ]
