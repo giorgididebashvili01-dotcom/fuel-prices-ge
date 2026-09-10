@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-10T04:57:04.332Z",
+  "updated": "2026-09-10T11:33:38.165Z",
   "errors": [],
   "companies": [
     {
@@ -9,32 +9,32 @@
       "prices": [
         {
           "name": "G-Force სუპერი",
-          "price": 4.35,
+          "price": 4.43,
           "category": "super"
         },
         {
           "name": "G-Force პრემიუმი",
-          "price": 3.93,
+          "price": 3.99,
           "category": "premium"
         },
         {
           "name": "G-Force ევრო რეგულარი",
-          "price": 3.75,
+          "price": 3.79,
           "category": "regular"
         },
         {
           "name": "ევრო რეგულარი",
-          "price": 3.75,
+          "price": 3.79,
           "category": "regular"
         },
         {
           "name": "G-Force ევრო დიზელი",
-          "price": 4.53,
+          "price": 4.59,
           "category": "diesel"
         },
         {
           "name": "ევრო დიზელი",
-          "price": 4.43,
+          "price": 4.49,
           "category": "diesel"
         }
       ]
@@ -125,27 +125,27 @@
       "prices": [
         {
           "name": "ნანო სუპერი",
-          "price": 4.3,
+          "price": 4.4,
           "category": "super"
         },
         {
           "name": "ნანო პრემიუმი",
-          "price": 3.91,
+          "price": 3.95,
           "category": "premium"
         },
         {
           "name": "ნანო ევრო რეგულარი",
-          "price": 3.72,
+          "price": 3.75,
           "category": "regular"
         },
         {
           "name": "ევრო 5 დიზელი",
-          "price": 4.4,
+          "price": 4.48,
           "category": "diesel"
         },
         {
           "name": "ნანო ევრო 5 დიზელი",
-          "price": 4.5,
+          "price": 4.58,
           "category": "diesel"
         },
         {
@@ -167,22 +167,22 @@
       "prices": [
         {
           "name": "Super Ecto",
-          "price": 4.32,
+          "price": 4.4,
           "category": "super"
         },
         {
           "name": "Premium Avangard",
-          "price": 3.91,
+          "price": 3.98,
           "category": "premium"
         },
         {
           "name": "Euro Regular",
-          "price": 3.75,
+          "price": 3.78,
           "category": "regular"
         },
         {
           "name": "Euro Diesel",
-          "price": 4.52,
+          "price": 4.67,
           "category": "diesel"
         }
       ]
