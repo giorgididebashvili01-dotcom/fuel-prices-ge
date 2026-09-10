@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-10T16:33:35.457Z",
+  "updated": "2026-09-10T21:00:59.293Z",
   "errors": [],
   "companies": [
     {
@@ -56,12 +56,12 @@
         },
         {
           "name": "Eko Diesel",
-          "price": 4.66,
+          "price": 4.73,
           "category": "diesel"
         },
         {
           "name": "Euro Diesel",
-          "price": 4.63,
+          "price": 4.69,
           "category": "diesel"
         },
         {
@@ -71,7 +71,7 @@
         },
         {
           "name": "Diesel Energy",
-          "price": 4.59,
+          "price": 4.65,
           "category": "diesel"
         },
         {
