@@ -1,8 +1,6 @@
 {
-  "updated": "2026-09-11T21:05:52.086Z",
-  "errors": [
-    "Portal: https://portal.com.ge/ka/fuel-prices -> HTTP 522"
-  ],
+  "updated": "2026-09-11T23:23:48.737Z",
+  "errors": [],
   "companies": [
     {
       "id": "gulf",
@@ -152,7 +150,7 @@
         },
         {
           "name": "თხევადი აირი",
-          "price": 2.09,
+          "price": 1.75,
           "category": "gas"
         },
         {
@@ -196,27 +194,27 @@
       "prices": [
         {
           "name": "SUPER",
-          "price": 4.04,
+          "price": 4.09,
           "category": "super"
         },
         {
           "name": "PREMIUM",
-          "price": 3.84,
+          "price": 3.89,
           "category": "premium"
         },
         {
           "name": "EURO REGULAR",
-          "price": 3.69,
+          "price": 3.74,
           "category": "regular"
         },
         {
           "name": "EURO DIESEL",
-          "price": 4.49,
+          "price": 4.54,
           "category": "diesel"
         },
         {
           "name": "EFFECT DIESEL",
-          "price": 4.34,
+          "price": 4.39,
           "category": "diesel"
         }
       ]
