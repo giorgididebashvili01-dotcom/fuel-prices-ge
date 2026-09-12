@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="ka">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0f14">
+<title>SOL ფასის მეთვალყურე</title>
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+  :root{
+    --bg:#0b0f14; --card:#141a22; --card2:#1b232d; --line:#26303c;
+    --txt:#e8eef6; --dim:#8b9bb0; --up:#22c98a; --down:#ff5c72;
+    --acc:#14f195; --acc2:#9945ff;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{margin:0;background:var(--bg);color:var(--txt);
+    font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans Georgian",sans-serif;
+    padding:14px 14px 40px;max-width:640px;margin:0 auto}
+  h1{font-size:17px;margin:0;font-weight:650;letter-spacing:.2px}
+  .top{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+  .dot{width:9px;height:9px;border-radius:50%;background:#666;flex:none;transition:.3s}
+  .dot.on{background:var(--up);box-shadow:0 0 10px var(--up)}
+  .dot.off{background:var(--down)}
+  .sp{flex:1}
+  .btn{background:var(--card2);color:var(--txt);border:1px solid var(--line);border-radius:10px;
+    padding:9px 13px;font-size:14px;font-family:inherit;cursor:pointer}
+  .btn:active{transform:scale(.97)}
+  .btn.p{background:linear-gradient(120deg,var(--acc2),var(--acc));color:#08131a;border:0;font-weight:700}
+  .btn.sm{padding:6px 10px;font-size:13px}
+  .btn.gh{background:transparent}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px}
+  .asset{display:flex;align-items:baseline;gap:8px}
+  .asset .nm{font-weight:700;font-size:15px;letter-spacing:.5px}
+  .asset .src{font-size:11px;color:var(--dim)}
+  .price{font-size:38px;font-weight:700;letter-spacing:-1px;margin:2px 0;font-variant-numeric:tabular-nums}
+  .price small{font-size:20px;color:var(--dim);font-weight:600}
+  .row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;font-size:13px;color:var(--dim)}
+  .chg{font-weight:700}
+  .up{color:var(--up)} .down{color:var(--down)}
+  .flash{animation:fl .5s}
+  @keyframes fl{0%{background:rgba(20,241,149,.12)}100%{background:transparent}}
+  svg.spark{width:100%;height:64px;display:block;margin-top:8px;overflow:visible}
+  label{display:block;font-size:12px;color:var(--dim);margin:0 0 5px 2px}
+  input,select{width:100%;background:#0e141b;color:var(--txt);border:1px solid var(--line);
+    border-radius:11px;padding:12px;font-size:16px;font-family:inherit}
+  input:focus,select:focus{outline:2px solid var(--acc2);outline-offset:-1px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .seg{display:flex;background:#0e141b;border:1px solid var(--line);border-radius:11px;overflow:hidden}
+  .seg button{flex:1;background:transparent;border:0;color:var(--dim);padding:12px 4px;font:600 14px inherit;cursor:pointer}
+  .seg button.on{background:var(--card2);color:var(--txt)}
+  .seg button.on.a{color:var(--up)} .seg button.on.b{color:var(--down)}
+  .quick{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+  .chip{background:#0e141b;border:1px solid var(--line);color:var(--dim);border-radius:999px;
+    padding:6px 11px;font-size:12.5px;cursor:pointer}
+  .chip:active{border-color:var(--acc)}
+  .al{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}
+  .al:last-child{border:0;padding-bottom:0}
+  .al .ic{font-size:17px;width:22px;text-align:center}
+  .al .mid{flex:1;min-width:0}
+  .al .t{font-weight:650;font-variant-numeric:tabular-nums}
+  .al .s{font-size:11.5px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .x{background:transparent;border:0;color:var(--dim);font-size:20px;padding:4px 8px;cursor:pointer}
+  .muted{color:var(--dim);font-size:13px}
+  .warn{background:#3a2212;border:1px solid #7a4b1c;color:#ffcf9a;border-radius:11px;padding:10px 12px;font-size:13px;margin-bottom:12px}
+  .ok{color:var(--up)}
+  .t-hd{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);margin:0 0 10px}
+  .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:22px;background:var(--card2);
+    border:1px solid var(--line);border-radius:12px;padding:11px 16px;font-size:14px;opacity:0;
+    transition:.25s;pointer-events:none;max-width:92vw;text-align:center;z-index:9}
+  .toast.on{opacity:1;bottom:30px}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="dot" id="dot"></div>
+  <h1>SOL ფასის მეთვალყურე</h1>
+  <div class="sp"></div>
+  <button class="btn sm gh" id="test">🔔 ტესტი</button>
+</div>
+
+<div id="tgwarn" class="warn" hidden></div>
+<div id="err" class="warn" hidden></div>
+
+<div id="cards"></div>
+
+<div class="card">
+  <p class="t-hd">ახალი შეტყობინება</p>
+  <div class="seg" style="margin-bottom:10px">
+    <button id="bAbove" class="on a" data-t="above">⬆️ ზემოთ გადავა</button>
+    <button id="bBelow" data-t="below">⬇️ ქვემოთ ჩამოვა</button>
+  </div>
+  <div class="grid">
+    <div>
+      <label>ფასი (USD)</label>
+      <input id="price" type="number" inputmode="decimal" step="any" placeholder="0.00">
+    </div>
+    <div>
+      <label>მონეტა</label>
+      <select id="asset"></select>
+    </div>
+  </div>
+  <div class="quick" id="quick"></div>
+  <div style="margin-top:10px">
+    <label>შენიშვნა (არასავალდებულო)</label>
+    <input id="note" maxlength="120" placeholder="მაგ: გაყიდვის დონე">
+  </div>
+  <label style="display:flex;align-items:center;gap:9px;margin:12px 0 0;font-size:14px;color:var(--txt)">
+    <input id="repeat" type="checkbox" style="width:19px;height:19px;flex:none">
+    გამეორებადი (არ ჩაქრება, <span id="cd">15</span> წთ პაუზით)
+  </label>
+  <button class="btn p" id="add" style="width:100%;margin-top:12px;padding:13px">დაწესება</button>
+</div>
+
+<div class="card">
+  <p class="t-hd">აქტიური შეტყობინებები <span id="cnt" class="muted"></span></p>
+  <div id="alerts"><p class="muted">ჯერ არაფერია დაწესებული.</p></div>
+</div>
+
+<p class="muted" style="text-align:center">
+  ტელეგრამში: <code>/above 120</code> · <code>/below 95</code> · <code>/list</code> · <code>/price</code>
+</p>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const KEY = new URLSearchParams(location.search).get('key') || localStorage.getItem('sk') || '';
+if (KEY) localStorage.setItem('sk', KEY);
+const qs = KEY ? '?key=' + encodeURIComponent(KEY) : '';
+const $ = (id) => document.getElementById(id);
+let S = null, side = 'above', lastPrice = {}, touchedPrice = false;
+
+const f = (n, d = 2) => Number(n).toLocaleString('en-US', {minimumFractionDigits: d, maximumFractionDigits: d});
+function toast(t, bad) {
+  const el = $('toast'); el.textContent = t;
+  el.style.borderColor = bad ? 'var(--down)' : 'var(--line)';
+  el.classList.add('on'); setTimeout(() => el.classList.remove('on'), 2600);
+}
+async function api(path, method, body) {
+  const r = await fetch('/api/' + path + qs, {
+    method: method || 'GET',
+    headers: {'content-type': 'application/json'},
+    body: body ? JSON.stringify(body) : undefined
+  });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(j.error || ('HTTP ' + r.status));
+  return j;
+}
+
+/* ---------- render ---------- */
+function pct(p) {
+  if (!p.open24h) return null;
+  return ((p.price - p.open24h) / p.open24h) * 100;
+}
+function spark(arr) {
+  if (!arr || arr.length < 2) return '';
+  const v = arr.map(x => x[1]);
+  const mn = Math.min(...v), mx = Math.max(...v), rng = (mx - mn) || 1;
+  const W = 100, H = 30;
+  const pts = v.map((y, i) => [(i / (v.length - 1)) * W, H - ((y - mn) / rng) * H]);
+  const d = pts.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(2) + ' ' + p[1].toFixed(2)).join(' ');
+  const rise = v[v.length - 1] >= v[0];
+  const col = rise ? 'var(--up)' : 'var(--down)';
+  return `<svg class="spark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">
+    <path d="${d} L ${W} ${H} L 0 ${H} Z" fill="${col}" opacity=".10"/>
+    <path d="${d}" fill="none" stroke="${col}" stroke-width="1.1" vector-effect="non-scaling-stroke"
+      stroke-linejoin="round" stroke-linecap="round"/></svg>`;
+}
+function renderCards() {
+  const box = $('cards');
+  box.innerHTML = S.assets.map(a => {
+    const p = S.prices[a];
+    if (!p) return `<div class="card"><div class="asset"><span class="nm">${a}</span></div>
+      <div class="price">—</div><div class="row">ფასს ვეძებ…</div></div>`;
+    const c = pct(p), fiat = S.fiat ? f(p.price * S.fiat.rate) + ' ' + S.fiat.code : '';
+    const age = Math.round((Date.now() - p.ts) / 1000);
+    return `<div class="card" id="c-${a}">
+      <div class="asset"><span class="nm">${a}/USD</span><span class="src">${p.source} · ${age}წ წინ</span></div>
+      <div class="price" id="p-${a}">${f(p.price)}<small> $</small></div>
+      <div class="row">
+        ${c === null ? '' : `<span class="chg ${c >= 0 ? 'up' : 'down'}">${c >= 0 ? '▲' : '▼'} ${Math.abs(c).toFixed(2)}% <span class="muted">24სთ</span></span>`}
+        ${fiat ? `<span>≈ ${fiat}</span>` : ''}
+        ${p.high24h ? `<span>H ${f(p.high24h)}</span><span>L ${f(p.low24h)}</span>` : ''}
+      </div>
+      <div id="s-${a}"></div>
+    </div>`;
+  }).join('');
+  drawSparks();
+}
+async function drawSparks() {
+  try {
+    const h = await api('history');
+    for (const a of S.assets) { const el = $('s-' + a); if (el) el.innerHTML = spark(h[a]); }
+  } catch {}
+}
+function renderAlerts() {
+  const box = $('alerts');
+  const list = [...S.alerts].sort((x, y) => (y.active - x.active) || (y.id - x.id));
+  $('cnt').textContent = list.length ? '· ' + list.filter(a => a.active).length + ' აქტიური' : '';
+  if (!list.length) { box.innerHTML = '<p class="muted">ჯერ არაფერია დაწესებული.</p>'; return; }
+  box.innerHTML = list.map(a => {
+    const cur = S.prices[a.asset] ? S.prices[a.asset].price : null;
+    const dist = cur ? ((a.price - cur) / cur) * 100 : null;
+    const st = !a.active ? '✔️ ჩაქრა ' + (a.lastTriggered ? new Date(a.lastTriggered).toLocaleString('ka-GE') : '')
+      : a.armed ? (dist === null ? 'აქტიური' : `${dist >= 0 ? '+' : ''}${dist.toFixed(2)}% დაშორებით`)
+      : '⏸ ზონაშია — ელოდება ხელახალ გადაკვეთას';
+    return `<div class="al" style="${a.active ? '' : 'opacity:.5'}">
+      <div class="ic">${a.type === 'above' ? '⬆️' : '⬇️'}</div>
+      <div class="mid">
+        <div class="t">${a.asset} ${f(a.price)} $ ${a.repeat ? '🔁' : ''}</div>
+        <div class="s">#${a.id} · ${st}${a.note ? ' · ' + a.note : ''}${a.hits ? ' · ' + a.hits + '×' : ''}</div>
+      </div>
+      <button class="x" data-del="${a.id}">×</button>
+    </div>`;
+  }).join('');
+  box.querySelectorAll('[data-del]').forEach(b => b.onclick = async () => {
+    await api('alerts', 'DELETE', {id: +b.dataset.del}); toast('წაიშალა');
+  });
+}
+function renderQuick() {
+  const a = $('asset').value, p = S.prices[a];
+  if (!p) { $('quick').innerHTML = ''; return; }
+  const steps = side === 'above' ? [0.5, 1, 2, 5, 10] : [-0.5, -1, -2, -5, -10];
+  $('quick').innerHTML = steps.map(s => {
+    const v = p.price * (1 + s / 100);
+    return `<span class="chip" data-v="${v.toFixed(2)}">${s > 0 ? '+' : ''}${s}% · ${f(v)}</span>`;
+  }).join('') + `<span class="chip" data-v="${p.price.toFixed(2)}">ახლანდელი</span>`;
+  $('quick').querySelectorAll('.chip').forEach(c => c.onclick = () => {
+    $('price').value = c.dataset.v; touchedPrice = true;
+  });
+}
+function renderMeta() {
+  const w = $('tgwarn');
+  if (!S.telegram.configured) {
+    w.hidden = false;
+    w.innerHTML = '⚠️ ტელეგრამი გამორთულია — <b>.env</b>-ში ჩასვი <code>TELEGRAM_TOKEN</code> (@BotFather → /newbot) და გადატვირთე სერვერი.';
+  } else if (!S.telegram.chats) {
+    w.hidden = false;
+    w.innerHTML = '⚠️ ბოტს ტელეგრამში მიწერე <b>/start</b> — მერე შეტყობინებები მოვა.';
+  } else w.hidden = true;
+  $('err').hidden = !S.error;
+  if (S.error) $('err').textContent = '⚠️ ' + S.error;
+  $('cd').textContent = S.cooldownMin;
+}
+function fillAssets() {
+  const sel = $('asset');
+  if (sel.options.length === S.assets.length) return;
+  sel.innerHTML = S.assets.map(a => `<option>${a}</option>`).join('');
+}
+function render(ev) {
+  fillAssets(); renderCards(); renderAlerts(); renderMeta();
+  if (!touchedPrice) renderQuick(); else renderQuick();
+  for (const a of S.assets) {
+    const p = S.prices[a]; if (!p) continue;
+    if (lastPrice[a] && lastPrice[a] !== p.price) {
+      const el = $('p-' + a);
+      if (el) { el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); el.style.color = p.price > lastPrice[a] ? 'var(--up)' : 'var(--down)'; setTimeout(() => el.style.color = '', 450); }
+    }
+    lastPrice[a] = p.price;
+  }
+  if (ev && ev.type === 'fired') {
+    const a = ev.alert;
+    toast(`🔔 ${a.asset} ${a.type === 'above' ? 'ზემოთ' : 'ქვემოთ'} ${f(a.price)}$`);
+    if (navigator.vibrate) navigator.vibrate([120, 60, 120]);
+    beep();
+  }
+}
+function beep() {
+  try {
+    const C = new (window.AudioContext || window.webkitAudioContext)();
+    const o = C.createOscillator(), g = C.createGain();
+    o.connect(g); g.connect(C.destination); o.type = 'sine'; o.frequency.value = 880;
+    g.gain.setValueAtTime(.18, C.currentTime);
+    g.gain.exponentialRampToValueAtTime(.001, C.currentTime + .5);
+    o.start(); o.stop(C.currentTime + .5);
+  } catch {}
+}
+
+/* ---------- live ---------- */
+let es;
+function connect() {
+  es = new EventSource('/api/stream' + qs);
+  es.onopen = () => { $('dot').className = 'dot on'; };
+  es.onmessage = (m) => { const d = JSON.parse(m.data); S = d; render(d); };
+  es.onerror = () => { $('dot').className = 'dot off'; es.close(); setTimeout(connect, 3000); };
+}
+connect();
+setInterval(() => { if (S) renderCards(); }, 5000);
+
+/* ---------- inputs ---------- */
+document.querySelectorAll('.seg button').forEach(b => b.onclick = () => {
+  side = b.dataset.t;
+  $('bAbove').className = side === 'above' ? 'on a' : '';
+  $('bBelow').className = side === 'below' ? 'on b' : '';
+  touchedPrice = false; renderQuick();
+});
+$('price').oninput = () => touchedPrice = true;
+$('asset').onchange = renderQuick;
+$('add').onclick = async () => {
+  const price = parseFloat($('price').value);
+  if (!(price > 0)) return toast('ჩაწერე ფასი', 1);
+  try {
+    const a = await api('alerts', 'POST', {asset: $('asset').value, type: side, price, note: $('note').value, repeat: $('repeat').checked});
+    $('price').value = ''; $('note').value = ''; touchedPrice = false;
+    toast(a.armed ? '✅ დაწესდა #' + a.id : '✅ #' + a.id + ' — ფასი უკვე ზონაშია, გადაკვეთაზე მოვა');
+  } catch (e) { toast('❌ ' + e.message, 1); }
+};
+$('test').onclick = async () => {
+  try { await api('test', 'POST'); toast('🔔 ტელეგრამში გაიგზავნა'); }
+  catch (e) { toast('❌ ' + e.message, 1); }
+};
+</script>
+</body>
+</html>
