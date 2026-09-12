@@ -483,6 +483,16 @@ function localIPs() {
 }
 
 loadState();
+server.on('error', (e) => {
+  if (e.code === 'EADDRINUSE') {
+    console.error(`
+  პორტი ${CFG.port} დაკავებულია — ალბათ სერვერი უკვე გაშვებულია.
+  გახსენი http://localhost:${CFG.port}/ , ან .env-ში შეცვალე PORT.
+`);
+    process.exit(1);
+  }
+  throw e;
+});
 server.listen(CFG.port, CFG.host, () => {
   const key = CFG.accessKey ? `?key=${CFG.accessKey}` : '';
   console.log(`\n  SOL alerts გაშვებულია`);

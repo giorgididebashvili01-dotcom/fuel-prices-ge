@@ -16,11 +16,10 @@ TELEGRAM_TOKEN=8123456789:AAH...
 
 ## 2. გაშვება
 
-```bash
-npm start          # ან: node server.js
-```
+**Windows:** ორჯერ დააწკაპე `start.bat` — თვითონ გკითხავს token-ს, შექმნის `.env`-ს და გაუშვებს.
+**macOS / Linux:** `./start.sh` — იგივე.
 
-Windows-ზე: ორჯერ დააწკაპე `start.bat`. macOS/Linux: `./start.sh`
+ხელით რომ გირჩევნია: `cp .env.example .env` (ჩასვი token) და შემდეგ `node server.js`.
 
 კონსოლი დაგიწერს მისამართებს:
 
