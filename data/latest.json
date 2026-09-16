@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-15T21:32:47.317Z",
+  "updated": "2026-09-16T05:00:35.039Z",
   "errors": [],
   "companies": [
     {
@@ -93,27 +93,27 @@
       "prices": [
         {
           "name": "efix სუპერი",
-          "price": 4.44,
+          "price": 4.5,
           "category": "super"
         },
         {
           "name": "efix ევრო პრემიუმი",
-          "price": 3.99,
+          "price": 4.05,
           "category": "premium"
         },
         {
           "name": "efix ევრო რეგულარი",
-          "price": 3.78,
+          "price": 3.84,
           "category": "regular"
         },
         {
           "name": "efix ევრო დიზელი",
-          "price": 4.63,
+          "price": 4.75,
           "category": "diesel"
         },
         {
           "name": "ევრო დიზელი",
-          "price": 4.57,
+          "price": 4.67,
           "category": "diesel"
         }
       ]
