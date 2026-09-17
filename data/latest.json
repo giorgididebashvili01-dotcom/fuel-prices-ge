@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-16T21:28:49.347Z",
+  "updated": "2026-09-17T05:02:35.410Z",
   "errors": [],
   "companies": [
     {
@@ -209,12 +209,12 @@
         },
         {
           "name": "EURO DIESEL",
-          "price": 4.59,
+          "price": 4.69,
           "category": "diesel"
         },
         {
           "name": "EFFECT DIESEL",
-          "price": 4.44,
+          "price": 4.59,
           "category": "diesel"
         }
       ]
