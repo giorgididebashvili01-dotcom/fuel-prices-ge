@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-17T21:32:34.512Z",
+  "updated": "2026-09-18T04:55:36.046Z",
   "errors": [],
   "companies": [
     {
@@ -140,12 +140,12 @@
         },
         {
           "name": "ევრო 5 დიზელი",
-          "price": 4.52,
+          "price": 4.64,
           "category": "diesel"
         },
         {
           "name": "ნანო ევრო 5 დიზელი",
-          "price": 4.62,
+          "price": 4.74,
           "category": "diesel"
         },
         {
