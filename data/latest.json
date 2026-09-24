@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-24T05:05:39.019Z",
+  "updated": "2026-09-24T12:00:15.201Z",
   "errors": [],
   "companies": [
     {
@@ -167,22 +167,22 @@
       "prices": [
         {
           "name": "Super Ecto",
-          "price": 4.48,
+          "price": 4.55,
           "category": "super"
         },
         {
           "name": "Premium Avangard",
-          "price": 4.03,
+          "price": 4.05,
           "category": "premium"
         },
         {
           "name": "Euro Regular",
-          "price": 3.83,
+          "price": 3.85,
           "category": "regular"
         },
         {
           "name": "Euro Diesel",
-          "price": 4.76,
+          "price": 4.82,
           "category": "diesel"
         }
       ]
