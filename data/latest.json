@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-25T21:42:27.814Z",
+  "updated": "2026-09-26T05:11:45.803Z",
   "errors": [],
   "companies": [
     {
@@ -120,27 +120,27 @@
       "prices": [
         {
           "name": "ნანო სუპერი",
-          "price": 4.44,
+          "price": 4.5,
           "category": "super"
         },
         {
           "name": "ნანო პრემიუმი",
-          "price": 4.02,
+          "price": 4.15,
           "category": "premium"
         },
         {
           "name": "ნანო ევრო რეგულარი",
-          "price": 3.82,
+          "price": 3.86,
           "category": "regular"
         },
         {
           "name": "ევრო 5 დიზელი",
-          "price": 4.7,
+          "price": 4.78,
           "category": "diesel"
         },
         {
           "name": "ნანო ევრო 5 დიზელი",
-          "price": 4.8,
+          "price": 4.86,
           "category": "diesel"
         },
         {
