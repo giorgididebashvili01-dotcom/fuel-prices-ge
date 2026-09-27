@@ -1,0 +1,13 @@
+{
+  "name": "solana-alerts",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Live Solana price watcher with web dashboard and Telegram price alerts",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
