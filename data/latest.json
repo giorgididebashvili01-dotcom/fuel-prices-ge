@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-29T01:05:11.029Z",
+  "updated": "2026-09-29T09:59:59.665Z",
   "errors": [],
   "companies": [
     {
@@ -93,7 +93,7 @@
         },
         {
           "name": "efix ევრო პრემიუმი",
-          "price": 4.1,
+          "price": 4.16,
           "category": "premium"
         },
         {
@@ -167,17 +167,17 @@
         },
         {
           "name": "Premium Avangard",
-          "price": 4.05,
+          "price": 4.15,
           "category": "premium"
         },
         {
           "name": "Euro Regular",
-          "price": 3.85,
+          "price": 3.9,
           "category": "regular"
         },
         {
           "name": "Euro Diesel",
-          "price": 4.82,
+          "price": 4.92,
           "category": "diesel"
         }
       ]
