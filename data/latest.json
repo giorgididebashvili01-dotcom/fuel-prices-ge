@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-05T05:57:09.976Z",
+  "updated": "2026-10-05T15:01:54.981Z",
   "errors": [
     "Gulf: https://web.archive.org/web/2/https://gulf.ge/ge/fuel_prices -> HTTP 429"
   ],
@@ -164,22 +164,22 @@
       "prices": [
         {
           "name": "Super Ecto",
-          "price": 4.55,
+          "price": 4.6,
           "category": "super"
         },
         {
           "name": "Premium Avangard",
-          "price": 4.15,
+          "price": 4.25,
           "category": "premium"
         },
         {
           "name": "Euro Regular",
-          "price": 3.9,
+          "price": 3.95,
           "category": "regular"
         },
         {
           "name": "Euro Diesel",
-          "price": 4.92,
+          "price": 4.97,
           "category": "diesel"
         }
       ]
