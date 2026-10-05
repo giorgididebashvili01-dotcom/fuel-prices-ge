@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-05T15:01:54.981Z",
+  "updated": "2026-10-05T22:06:10.177Z",
   "errors": [
     "Gulf: https://web.archive.org/web/2/https://gulf.ge/ge/fuel_prices -> HTTP 429"
   ],
@@ -43,12 +43,12 @@
       "prices": [
         {
           "name": "Eko Super",
-          "price": 4.58,
+          "price": 4.62,
           "category": "super"
         },
         {
           "name": "Eko Premium",
-          "price": 4.26,
+          "price": 4.29,
           "category": "premium"
         },
         {
@@ -63,7 +63,7 @@
         },
         {
           "name": "Euro Regular",
-          "price": 3.97,
+          "price": 4.02,
           "category": "regular"
         },
         {
@@ -78,7 +78,7 @@
         },
         {
           "name": "A1 SUPER 100",
-          "price": 4.68,
+          "price": 4.72,
           "category": "super"
         }
       ]
