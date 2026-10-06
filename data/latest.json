@@ -1,8 +1,6 @@
 {
-  "updated": "2026-10-05T22:06:10.177Z",
-  "errors": [
-    "Gulf: https://web.archive.org/web/2/https://gulf.ge/ge/fuel_prices -> HTTP 429"
-  ],
+  "updated": "2026-10-06T06:36:02.009Z",
+  "errors": [],
   "companies": [
     {
       "id": "gulf",
@@ -11,27 +9,27 @@
       "prices": [
         {
           "name": "G-Force სუპერი",
-          "price": 4.55,
+          "price": 4.59,
           "category": "super"
         },
         {
           "name": "G-Force პრემიუმი",
-          "price": 4.17,
+          "price": 4.27,
           "category": "premium"
         },
         {
           "name": "G-Force ევრო რეგულარი",
-          "price": 3.89,
+          "price": 3.97,
           "category": "regular"
         },
         {
           "name": "G-Force ევრო დიზელი",
-          "price": 4.87,
+          "price": 4.95,
           "category": "diesel"
         },
         {
           "name": "ევრო დიზელი",
-          "price": 4.79,
+          "price": 4.87,
           "category": "diesel"
         }
       ]
