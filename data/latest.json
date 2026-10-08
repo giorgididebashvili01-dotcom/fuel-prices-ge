@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-08T10:47:06.910Z",
+  "updated": "2026-10-08T18:56:22.994Z",
   "errors": [],
   "companies": [
     {
@@ -88,17 +88,17 @@
       "prices": [
         {
           "name": "efix სუპერი",
-          "price": 4.56,
+          "price": 4.59,
           "category": "super"
         },
         {
           "name": "efix ევრო პრემიუმი",
-          "price": 4.16,
+          "price": 4.26,
           "category": "premium"
         },
         {
           "name": "efix ევრო რეგულარი",
-          "price": 3.88,
+          "price": 3.96,
           "category": "regular"
         },
         {
