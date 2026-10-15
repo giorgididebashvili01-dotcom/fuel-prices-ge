@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-15T04:55:24.919Z",
+  "updated": "2026-10-15T11:46:41.356Z",
   "errors": [
     "Gulf: https://web.archive.org/web/2/https://gulf.ge/ge/fuel_prices -> HTTP 429"
   ],
@@ -94,8 +94,18 @@
           "category": "super"
         },
         {
+          "name": "- efix სუპერი (თვითმომსახურების სადგურებზე)",
+          "price": 4.55,
+          "category": "super"
+        },
+        {
           "name": "efix ევრო პრემიუმი",
           "price": 4.32,
+          "category": "premium"
+        },
+        {
+          "name": "- efix ევრო პრემიუმი (თვითმომსახურების სადგურებზე)",
+          "price": 4.22,
           "category": "premium"
         },
         {
@@ -104,13 +114,28 @@
           "category": "regular"
         },
         {
+          "name": "- ევრო რეგულარი (თვითმომსახურების სადგურებზე)",
+          "price": 3.92,
+          "category": "regular"
+        },
+        {
           "name": "efix ევრო დიზელი",
           "price": 4.99,
           "category": "diesel"
         },
         {
+          "name": "- efix ევრო დიზელი (თვითმომსახურების სადგურებზე)",
+          "price": 4.89,
+          "category": "diesel"
+        },
+        {
           "name": "ევრო დიზელი",
           "price": 4.92,
+          "category": "diesel"
+        },
+        {
+          "name": "- ევრო დიზელი (თვითმომსახურების სადგურებზე)",
+          "price": 4.82,
           "category": "diesel"
         }
       ]
@@ -147,7 +172,7 @@
         },
         {
           "name": "თხევადი აირი",
-          "price": 1.75,
+          "price": 2.09,
           "category": "gas"
         },
         {
