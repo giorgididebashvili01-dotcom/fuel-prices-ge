@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-16T04:45:40.164Z",
+  "updated": "2026-10-16T11:40:45.030Z",
   "errors": [
     "Gulf: https://web.archive.org/web/2/https://gulf.ge/ge/fuel_prices -> HTTP 429"
   ],
@@ -78,7 +78,7 @@
         },
         {
           "name": "A1 SUPER 100",
-          "price": 4.74,
+          "price": 4.79,
           "category": "super"
         }
       ]
