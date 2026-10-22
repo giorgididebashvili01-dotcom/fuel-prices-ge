@@ -1,6 +1,8 @@
 {
-  "updated": "2026-10-22T05:05:47.788Z",
-  "errors": [],
+  "updated": "2026-10-22T12:08:53.466Z",
+  "errors": [
+    "Gulf: https://web.archive.org/web/2/https://gulf.ge/ge/fuel_prices -> HTTP 429"
+  ],
   "companies": [
     {
       "id": "gulf",
@@ -145,17 +147,17 @@
       "prices": [
         {
           "name": "ნანო სუპერი",
-          "price": 4.62,
+          "price": 4.65,
           "category": "super"
         },
         {
           "name": "ნანო პრემიუმი",
-          "price": 4.31,
+          "price": 4.37,
           "category": "premium"
         },
         {
           "name": "ნანო ევრო რეგულარი",
-          "price": 4.02,
+          "price": 4.06,
           "category": "regular"
         },
         {
