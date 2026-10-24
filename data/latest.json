@@ -1,8 +1,7 @@
 {
-  "updated": "2026-10-24T16:06:59.215Z",
+  "updated": "2026-10-24T21:00:54.488Z",
   "errors": [
-    "Gulf: https://web.archive.org/web/2/https://gulf.ge/ge/fuel_prices -> HTTP 429",
-    "Rompetrol: https://www.rompetrol.ge/ -> HTTP 403"
+    "Gulf: https://web.archive.org/web/2/https://gulf.ge/ge/fuel_prices -> HTTP 429"
   ],
   "companies": [
     {
@@ -173,7 +172,7 @@
         },
         {
           "name": "თხევადი აირი",
-          "price": 2.09,
+          "price": 1.75,
           "category": "gas"
         },
         {
