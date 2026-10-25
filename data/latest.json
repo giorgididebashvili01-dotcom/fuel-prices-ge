@@ -1,6 +1,8 @@
 {
-  "updated": "2026-10-25T21:00:39.162Z",
-  "errors": [],
+  "updated": "2026-10-25T23:22:40.313Z",
+  "errors": [
+    "Gulf: https://web.archive.org/web/2/https://gulf.ge/ge/fuel_prices -> HTTP 429"
+  ],
   "companies": [
     {
       "id": "gulf",
