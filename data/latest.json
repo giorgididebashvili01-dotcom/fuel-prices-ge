@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-05T01:32:31.241Z",
+  "updated": "2026-11-05T11:15:35.098Z",
   "errors": [
     "Gulf: https://web.archive.org/web/2/https://gulf.ge/ge/fuel_prices -> HTTP 429"
   ],
@@ -172,7 +172,7 @@
         },
         {
           "name": "თხევადი აირი",
-          "price": 2.09,
+          "price": 1.75,
           "category": "gas"
         },
         {
