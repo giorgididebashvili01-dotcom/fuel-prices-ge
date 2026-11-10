@@ -1,8 +1,6 @@
 {
-  "updated": "2026-11-10T17:10:54.378Z",
-  "errors": [
-    "Gulf: https://web.archive.org/web/2/https://gulf.ge/ge/fuel_prices -> HTTP 429"
-  ],
+  "updated": "2026-11-10T23:36:30.133Z",
+  "errors": [],
   "companies": [
     {
       "id": "gulf",
@@ -53,12 +51,12 @@
         },
         {
           "name": "Eko Diesel",
-          "price": 5.07,
+          "price": 4.99,
           "category": "diesel"
         },
         {
           "name": "Euro Diesel",
-          "price": 4.98,
+          "price": 4.94,
           "category": "diesel"
         },
         {
@@ -68,7 +66,7 @@
         },
         {
           "name": "Diesel Energy",
-          "price": 4.93,
+          "price": 4.91,
           "category": "diesel"
         },
         {
