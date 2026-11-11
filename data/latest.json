@@ -1,6 +1,8 @@
 {
-  "updated": "2026-11-10T23:36:30.133Z",
-  "errors": [],
+  "updated": "2026-11-11T06:50:18.972Z",
+  "errors": [
+    "Wissol: fetch failed"
+  ],
   "companies": [
     {
       "id": "gulf",
@@ -88,52 +90,52 @@
       "prices": [
         {
           "name": "efix სუპერი",
-          "price": 4.68,
+          "price": 4.65,
           "category": "super"
         },
         {
           "name": "- efix სუპერი (თვითმომსახურების სადგურებზე)",
-          "price": 4.58,
+          "price": 4.55,
           "category": "super"
         },
         {
           "name": "efix ევრო პრემიუმი",
-          "price": 4.38,
+          "price": 4.35,
           "category": "premium"
         },
         {
           "name": "- efix ევრო პრემიუმი (თვითმომსახურების სადგურებზე)",
-          "price": 4.28,
+          "price": 4.25,
           "category": "premium"
         },
         {
           "name": "efix ევრო რეგულარი",
-          "price": 4.08,
+          "price": 4.04,
           "category": "regular"
         },
         {
           "name": "- ევრო რეგულარი (თვითმომსახურების სადგურებზე)",
-          "price": 3.98,
+          "price": 3.94,
           "category": "regular"
         },
         {
           "name": "efix ევრო დიზელი",
-          "price": 5.04,
+          "price": 4.99,
           "category": "diesel"
         },
         {
           "name": "- efix ევრო დიზელი (თვითმომსახურების სადგურებზე)",
-          "price": 4.94,
+          "price": 4.89,
           "category": "diesel"
         },
         {
           "name": "ევრო დიზელი",
-          "price": 4.97,
+          "price": 4.94,
           "category": "diesel"
         },
         {
           "name": "- ევრო დიზელი (თვითმომსახურების სადგურებზე)",
-          "price": 4.87,
+          "price": 4.84,
           "category": "diesel"
         }
       ]
