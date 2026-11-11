@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-11T06:50:18.972Z",
+  "updated": "2026-11-11T17:19:14.174Z",
   "errors": [
-    "Wissol: fetch failed"
+    "Gulf: https://web.archive.org/web/2/https://gulf.ge/ge/fuel_prices -> HTTP 429"
   ],
   "companies": [
     {
