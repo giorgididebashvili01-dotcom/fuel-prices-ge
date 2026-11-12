@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-11T17:19:14.174Z",
+  "updated": "2026-11-12T00:53:17.484Z",
   "errors": [
     "Gulf: https://web.archive.org/web/2/https://gulf.ge/ge/fuel_prices -> HTTP 429"
   ],
@@ -152,22 +152,22 @@
         },
         {
           "name": "ნანო პრემიუმი",
-          "price": 4.37,
+          "price": 4.31,
           "category": "premium"
         },
         {
           "name": "ნანო ევრო რეგულარი",
-          "price": 4.06,
+          "price": 4,
           "category": "regular"
         },
         {
           "name": "ევრო 5 დიზელი",
-          "price": 4.9,
+          "price": 4.85,
           "category": "diesel"
         },
         {
           "name": "ნანო ევრო 5 დიზელი",
-          "price": 4.96,
+          "price": 4.9,
           "category": "diesel"
         },
         {
