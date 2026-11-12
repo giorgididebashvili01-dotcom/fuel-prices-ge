@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-12T00:53:17.484Z",
+  "updated": "2026-11-12T11:32:49.449Z",
   "errors": [
     "Gulf: https://web.archive.org/web/2/https://gulf.ge/ge/fuel_prices -> HTTP 429"
   ],
@@ -216,27 +216,27 @@
       "prices": [
         {
           "name": "SUPER",
-          "price": 4.39,
+          "price": 4.29,
           "category": "super"
         },
         {
           "name": "PREMIUM",
-          "price": 4.19,
+          "price": 4.14,
           "category": "premium"
         },
         {
           "name": "EURO REGULAR",
-          "price": 3.94,
+          "price": 3.89,
           "category": "regular"
         },
         {
           "name": "EURO DIESEL",
-          "price": 4.94,
+          "price": 4.89,
           "category": "diesel"
         },
         {
           "name": "EFFECT DIESEL",
-          "price": 4.84,
+          "price": 4.79,
           "category": "diesel"
         }
       ]
