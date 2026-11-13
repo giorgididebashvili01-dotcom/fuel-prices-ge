@@ -1,8 +1,7 @@
 {
-  "updated": "2026-11-13T11:17:22.626Z",
+  "updated": "2026-11-13T19:55:05.765Z",
   "errors": [
-    "Gulf: https://web.archive.org/web/2/https://gulf.ge/ge/fuel_prices -> HTTP 429",
-    "Rompetrol: https://www.rompetrol.ge/ -> HTTP 403"
+    "Gulf: https://web.archive.org/web/2/https://gulf.ge/ge/fuel_prices -> HTTP 429"
   ],
   "companies": [
     {
