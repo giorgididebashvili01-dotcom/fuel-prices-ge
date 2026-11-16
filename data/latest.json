@@ -1,6 +1,8 @@
 {
-  "updated": "2026-11-16T06:51:33.387Z",
-  "errors": [],
+  "updated": "2026-11-16T19:43:25.942Z",
+  "errors": [
+    "Portal: terminated"
+  ],
   "companies": [
     {
       "id": "gulf",
