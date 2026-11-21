@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-21T02:34:53.680Z",
+  "updated": "2026-11-21T11:28:27.587Z",
   "errors": [],
   "companies": [
     {
@@ -9,17 +9,17 @@
       "prices": [
         {
           "name": "G-Force სუპერი",
-          "price": 4.65,
+          "price": 4.59,
           "category": "super"
         },
         {
           "name": "G-Force პრემიუმი",
-          "price": 4.35,
+          "price": 4.29,
           "category": "premium"
         },
         {
           "name": "G-Force ევრო რეგულარი",
-          "price": 4.05,
+          "price": 3.99,
           "category": "regular"
         },
         {
