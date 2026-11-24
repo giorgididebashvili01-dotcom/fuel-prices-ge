@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-24T13:59:34.433Z",
+  "updated": "2026-11-24T23:57:56.897Z",
   "errors": [],
   "companies": [
     {
@@ -41,32 +41,32 @@
       "prices": [
         {
           "name": "Eko Super",
-          "price": 4.68,
+          "price": 4.62,
           "category": "super"
         },
         {
           "name": "Eko Premium",
-          "price": 4.39,
+          "price": 4.32,
           "category": "premium"
         },
         {
           "name": "Eko Diesel",
-          "price": 4.99,
+          "price": 4.95,
           "category": "diesel"
         },
         {
           "name": "Euro Diesel",
-          "price": 4.94,
+          "price": 4.9,
           "category": "diesel"
         },
         {
           "name": "Euro Regular",
-          "price": 4.08,
+          "price": 4.02,
           "category": "regular"
         },
         {
           "name": "Diesel Energy",
-          "price": 4.91,
+          "price": 4.87,
           "category": "diesel"
         },
         {
@@ -76,7 +76,7 @@
         },
         {
           "name": "A1 SUPER 100",
-          "price": 4.83,
+          "price": 4.77,
           "category": "super"
         },
         {
