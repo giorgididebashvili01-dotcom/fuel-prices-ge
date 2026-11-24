@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-24T02:23:57.298Z",
+  "updated": "2026-11-24T13:59:34.433Z",
   "errors": [],
   "companies": [
     {
@@ -78,6 +78,11 @@
           "name": "A1 SUPER 100",
           "price": 4.83,
           "category": "super"
+        },
+        {
+          "name": "Electricity",
+          "price": 0.9,
+          "category": "other"
         }
       ]
     },
