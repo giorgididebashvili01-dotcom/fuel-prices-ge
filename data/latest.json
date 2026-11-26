@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-26T03:39:39.650Z",
+  "updated": "2026-11-26T17:07:24.036Z",
   "errors": [],
   "companies": [
     {
@@ -24,12 +24,12 @@
         },
         {
           "name": "G-Force ევრო დიზელი",
-          "price": 4.93,
+          "price": 4.87,
           "category": "diesel"
         },
         {
           "name": "ევრო დიზელი",
-          "price": 4.87,
+          "price": 4.77,
           "category": "diesel"
         }
       ]
