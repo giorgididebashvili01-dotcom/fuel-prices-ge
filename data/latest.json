@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-27T01:49:34.403Z",
+  "updated": "2026-11-27T12:49:45.402Z",
   "errors": [],
   "companies": [
     {
@@ -9,17 +9,17 @@
       "prices": [
         {
           "name": "G-Force სუპერი",
-          "price": 4.59,
+          "price": 4.49,
           "category": "super"
         },
         {
           "name": "G-Force პრემიუმი",
-          "price": 4.29,
+          "price": 4.09,
           "category": "premium"
         },
         {
           "name": "G-Force ევრო რეგულარი",
-          "price": 3.99,
+          "price": 3.89,
           "category": "regular"
         },
         {
@@ -192,22 +192,22 @@
       "prices": [
         {
           "name": "Super Ecto",
-          "price": 4.65,
+          "price": 4.58,
           "category": "super"
         },
         {
           "name": "Premium Avangard",
-          "price": 4.32,
+          "price": 4.27,
           "category": "premium"
         },
         {
           "name": "Euro Regular",
-          "price": 4.02,
+          "price": 3.97,
           "category": "regular"
         },
         {
           "name": "Euro Diesel",
-          "price": 4.97,
+          "price": 4.85,
           "category": "diesel"
         }
       ]
