@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-27T23:35:41.086Z",
+  "updated": "2026-11-28T08:08:45.417Z",
   "errors": [],
   "companies": [
     {
@@ -93,52 +93,52 @@
       "prices": [
         {
           "name": "efix სუპერი",
-          "price": 4.65,
+          "price": 4.52,
           "category": "super"
         },
         {
           "name": "- efix სუპერი (თვითმომსახურების სადგურებზე)",
-          "price": 4.55,
+          "price": 4.42,
           "category": "super"
         },
         {
           "name": "efix ევრო პრემიუმი",
-          "price": 4.35,
+          "price": 4.12,
           "category": "premium"
         },
         {
           "name": "- efix ევრო პრემიუმი (თვითმომსახურების სადგურებზე)",
-          "price": 4.25,
+          "price": 4.02,
           "category": "premium"
         },
         {
           "name": "efix ევრო რეგულარი",
-          "price": 4.04,
+          "price": 3.91,
           "category": "regular"
         },
         {
           "name": "- ევრო რეგულარი (თვითმომსახურების სადგურებზე)",
-          "price": 3.94,
+          "price": 3.81,
           "category": "regular"
         },
         {
           "name": "efix ევრო დიზელი",
-          "price": 4.99,
-          "category": "diesel"
-        },
-        {
-          "name": "- efix ევრო დიზელი (თვითმომსახურების სადგურებზე)",
-          "price": 4.89,
-          "category": "diesel"
-        },
-        {
-          "name": "ევრო დიზელი",
           "price": 4.94,
           "category": "diesel"
         },
         {
-          "name": "- ევრო დიზელი (თვითმომსახურების სადგურებზე)",
+          "name": "- efix ევრო დიზელი (თვითმომსახურების სადგურებზე)",
           "price": 4.84,
+          "category": "diesel"
+        },
+        {
+          "name": "ევრო დიზელი",
+          "price": 4.89,
+          "category": "diesel"
+        },
+        {
+          "name": "- ევრო დიზელი (თვითმომსახურების სადგურებზე)",
+          "price": 4.79,
           "category": "diesel"
         }
       ]
@@ -219,27 +219,27 @@
       "prices": [
         {
           "name": "SUPER",
-          "price": 4.29,
+          "price": 4.19,
           "category": "super"
         },
         {
           "name": "PREMIUM",
-          "price": 4.14,
+          "price": 4.04,
           "category": "premium"
         },
         {
           "name": "EURO REGULAR",
-          "price": 3.89,
+          "price": 3.84,
           "category": "regular"
         },
         {
           "name": "EURO DIESEL",
-          "price": 4.89,
+          "price": 4.79,
           "category": "diesel"
         },
         {
           "name": "EFFECT DIESEL",
-          "price": 4.79,
+          "price": 4.69,
           "category": "diesel"
         }
       ]
